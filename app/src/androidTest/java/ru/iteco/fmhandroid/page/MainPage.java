@@ -65,8 +65,44 @@ public class MainPage {
         onView(withText("Новости")).check(matches(isDisplayed())); // проверяем что заголовок Новости отображается
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.container_list_claim_include_on_fragment_main), 10000)); // ожидаем появление нужного элемента
         onView(withText("Заявки")).check(matches(isDisplayed())); // проверяем что заголовок Заявки отображается
+    }
+
+    @Test
+    @DisplayName("Переход во все новости")
+    public void GoToNewsBlock() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.container_list_news_include_on_fragment_main), 10000)); // ожидаем появление нужного элемента
+        onView(withText("Новости")).check(matches(isDisplayed())); // проверяем что заголовок Новости отображается
+        onView(withText("ВСЕ НОВОСТИ")).perform(click()); // кликаем по Все Новости
+        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
+    }
+
+    @Test
+    @DisplayName("Переход во все заявки")
+    public void GoToClaimsBlock() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.container_list_news_include_on_fragment_main), 10000)); // ожидаем появление нужного элемента
+        onView(withText("Заявки")).check(matches(isDisplayed())); // проверяем что заголовок Новости отображается
+        onView(withText("ВСЕ ЗАЯВКИ")).perform(click()); // кликаем по Все Новости
+        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что страница заявок отображается
+    }
+
+    @Test
+    @DisplayName("Раскрытие второй новости")
+    public void RevealSecondNews() {
+        onView(withIndex(withId(R.id.news_item_material_card_view), 1)).perform(click()); // с помощью утилиты находим 2ю новость в списке и кликаем по ней
+        onView(withIndex(withId(R.id.news_item_description_text_view), 1)).check(matches(isDisplayed())); // проверяем что описание новости отображается
 
     }
 
+    @Test
+    @DisplayName("Раскрытие первой заявки")
+    public void RevealFirstClaim() {
+        withText("ВСЕ ЗАЯВКИ")
+        onView(ViewMatchers.withText("ВСЕ ЗАЯВКИ")).perform(ViewActions.swipeUp());
+        onView(withText("ВСЕ ЗАЯВКИ")).perform(ViewActions.scrollTo());
+        onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
+        onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // проверяем что описание заявки отображается
+
+
+    }
 
 }
