@@ -62,7 +62,7 @@ public class ClaimsPageTests {
 
     @Test
     @DisplayName("Просмотр второй заявки")
-    public void ViewClaims() {
+    public void ViewSecondClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Заявки")).perform(click()); // кликаем по Новости
@@ -85,7 +85,7 @@ public class ClaimsPageTests {
 
     @Test
     @DisplayName("Открытие окна создания заявки")
-    public void CreateClaims() {
+    public void OpenCreateClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Заявки")).perform(click()); // кликаем по Новости

@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.tests.AuthorizationTests;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
@@ -61,7 +60,7 @@ public class NewsPageTests {
 
     @Test
     @DisplayName("Просмотр третьей новости")
-    public void ViewNews() {
+    public void ViewThirdNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
@@ -70,8 +69,8 @@ public class NewsPageTests {
     }
 
     @Test
-    @DisplayName("Сортировка списка новостей")
-    public void SortNews() {
+    @DisplayName("Открытие сортировки списка новостей")
+    public void OpenSortNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
@@ -83,7 +82,7 @@ public class NewsPageTests {
 
     @Test
     @DisplayName("Открытие фильтра новостей")
-    public void FilterNews() {
+    public void OpenFilterNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
@@ -95,7 +94,7 @@ public class NewsPageTests {
 
     @Test
     @DisplayName("Открытие окна редактирования новостей")
-    public void NewsEditScreen() {
+    public void OpenNewsEditScreen() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
