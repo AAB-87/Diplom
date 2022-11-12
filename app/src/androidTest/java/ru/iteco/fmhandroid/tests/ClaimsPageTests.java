@@ -1,28 +1,21 @@
-package ru.iteco.fmhandroid.page;
+package ru.iteco.fmhandroid.tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import static org.hamcrest.Matchers.allOf;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.PerformException;
-import androidx.test.espresso.contrib.RecyclerViewActions;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.authorization.Authorization;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,9 +27,9 @@ import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class ClaimsPage {
+public class ClaimsPageTests {
 
-    Authorization authorization = new Authorization(); // создаём объект класса Authorization чтобы его использовать
+    AuthorizationTests authorization = new AuthorizationTests(); // создаём объект класса Authorization чтобы его использовать
 
     @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
     public ActivityTestRule<AppActivity> activityTestRule =

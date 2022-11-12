@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.authorization;
+package ru.iteco.fmhandroid.tests;
 
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
@@ -28,7 +28,7 @@ import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class Authorization {
+public class AuthorizationTests {
 
     @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
     public ActivityTestRule<ru.iteco.fmhandroid.ui.AppActivity> activityTestRule =

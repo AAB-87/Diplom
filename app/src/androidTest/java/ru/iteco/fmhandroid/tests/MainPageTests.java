@@ -1,28 +1,26 @@
-package ru.iteco.fmhandroid.page;
+package ru.iteco.fmhandroid.tests;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.doubleClick;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import static org.hamcrest.Matchers.allOf;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.PerformException;
-import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.authorization.Authorization;
+import ru.iteco.fmhandroid.tests.AuthorizationTests;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,9 +32,9 @@ import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class MainPage {
+public class MainPageTests {
 
-    Authorization authorization = new Authorization(); // создаём объект класса Authorization чтобы его использовать
+    AuthorizationTests authorization = new AuthorizationTests(); // создаём объект класса Authorization чтобы его использовать
 
     @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
     public ActivityTestRule<AppActivity> activityTestRule =
@@ -93,15 +91,36 @@ public class MainPage {
 
     }
 
+
     @Test
     @DisplayName("Раскрытие первой заявки")
-    public void RevealFirstClaim() {
-        withText("ВСЕ ЗАЯВКИ")
-        onView(ViewMatchers.withText("ВСЕ ЗАЯВКИ")).perform(ViewActions.swipeUp());
-        onView(withText("ВСЕ ЗАЯВКИ")).perform(ViewActions.scrollTo());
+    public void RevealFirstClaim(Integer claimPosition) {
+        onView((withId(R.id.claim_list_recycler_view))).perform(actionOnItemAtPosition(claimPosition, swipeUp()));
+//        onView(ViewMatchers.withText("ВСЕ ЗАЯВКИ")).perform(ViewActions.swipeUp());
+//        onView(withText("ВСЕ ЗАЯВКИ")).perform(ViewActions.scrollTo());
         onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
         onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // проверяем что описание заявки отображается
 
+
+    }
+
+    @Test
+    @DisplayName("Раскрытие/скрытие блока новости")
+    public void RevealAndHideBlockNews() {
+        onView(withIndex(withId(R.id.expand_material_button), 0)).perform(doubleClick());
+
+    }
+
+    @Test
+    @DisplayName("Раскрытие/скрытие блока заявки")
+    public void RevealAndHideBlockClaims() {
+        onView(withIndex(withId(R.id.expand_material_button), 1)).perform(doubleClick());
+
+    }
+
+    @Test
+    @DisplayName("Переход к созданию заявки")
+    public void ClickCreateClaim() {
 
     }
 
