@@ -3,35 +3,41 @@ package ru.iteco.fmhandroid.tests;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasData;
+import static org.hamcrest.Matchers.allOf;
+
+import android.content.Intent;
 
 import androidx.test.espresso.PerformException;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
+
+import io.qameta.allure.kotlin.junit4.DisplayName;
+import ru.iteco.fmhandroid.R;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class NewsPageTests {
+public class AboutAppPageTests {
 
     AuthorizationPageTests authorization = new AuthorizationPageTests(); // создаём объект класса Authorization чтобы его использовать
 
     @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
     public ActivityTestRule<AppActivity> activityTestRule =
-            new ActivityTestRule<>(AppActivity.class);
+            new ActivityTestRule<>(ru.iteco.fmhandroid.ui.AppActivity.class);
 
     // Общие правила
     // ViewMatcher - находим, определяем элемент в иерархии
@@ -50,60 +56,52 @@ public class NewsPageTests {
     }
 
     @Test
-    @DisplayName("Открытие страницы новостей")
-    public void OpenNewsPage() {
+    @DisplayName("Открытие страницы О приложении")
+    public void OpenAboutAppPage() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("Новости")).perform(click()); // кликаем по Новости
-        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
+        onView(withText("О приложении")).perform(click()); // кликаем по О приложении
+        onView(withId(R.id.about_version_title_text_view)).check(matches(isDisplayed())); // проверяем что верстия приложения отображается
+    }
+    @Test
+    @DisplayName("Проверка версии приложения")
+    public void CheckVersionApp() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
+        onView(withText("О приложении")).perform(click()); // кликаем по О приложении
+        onView(withId(R.id.about_version_value_text_view)).check(matches(withText("1.0.0"))); // проверяем какая версия отображается
     }
 
     @Test
-    @DisplayName("Просмотр третьей новости")
-    public void ViewThirdNews() {
+    @DisplayName("Переход по ссылке Политики конфиденциальности")
+    public void ClickPrivacyPolicy() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("Новости")).perform(click()); // кликаем по Новости
-        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
-        onView(withIndex(withId(R.id.news_item_material_card_view), 2)).perform(click()); // с помощью утилиты находим 3ю новость в списке и кликаем по ней
+        onView(withText("О приложении")).perform(click()); // кликаем по О приложении
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.about_privacy_policy_value_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.about_privacy_policy_value_text_view)).perform(click()); // кликаем по ссылке Политика конфиденциальности
+        intended(allOf(hasData("https://vhospice.org/#/privacy-policy/"), hasAction(Intent.ACTION_VIEW))); // переход по ссылке
     }
 
     @Test
-    @DisplayName("Открытие сортировки списка новостей")
-    public void OpenSortNews() {
+    @DisplayName("Переход по ссылке Пользовательское соглашение")
+    public void ClickUserAgreement() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("Новости")).perform(click()); // кликаем по Новости
-        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.sort_news_material_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.sort_news_material_button)).perform(click()); // кликаем по кнопке Сортировки
-        // нужно проверить что сортировка произошла
+        onView(withText("О приложении")).perform(click()); // кликаем по О приложении
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.about_terms_of_use_value_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.about_terms_of_use_value_text_view)).perform(click()); // кликаем по ссылке Пользовательское соглашение
+        intended(allOf(hasData("https://vhospice.org/#/terms-of-use"), hasAction(Intent.ACTION_VIEW))); // переход по ссылке
     }
 
     @Test
-    @DisplayName("Открытие фильтра новостей")
-    public void OpenFilterNews() {
+    @DisplayName("Проверка названия производителия и года создания приложения")
+    public void CheckCompanyNameAndYear() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("Новости")).perform(click()); // кликаем по Новости
-        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_news_material_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.filter_news_material_button)).perform(click()); // кликаем по кнопке Сортировка
-        onView(withId(R.id.filter_news_title_text_view)).check(matches(withText("Фильтровать новости"))); // проверяем что фильтр открылся
-    }
-
-    @Test
-    @DisplayName("Открытие окна редактирования новостей")
-    public void OpenNewsEditScreen() {
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("Новости")).perform(click()); // кликаем по Новости
-        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_material_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.edit_news_material_button)).perform(click()); // кликаем по кнопке Редактирование
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_list_recycler_view), 10000)); // проверяем что отображаются новости для редактирования
+        onView(withText("О приложении")).perform(click()); // кликаем по О приложении
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.about_company_info_label_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.about_company_info_label_text_view)).check(matches(withText("© Айтеко, 2022"))); // кликаем по ссылке Пользовательское соглашение
     }
 
 }
-
-

@@ -29,7 +29,7 @@ import ru.iteco.fmhandroid.utils.ViewActions;
 
 public class ClaimsPageTests {
 
-    AuthorizationTests authorization = new AuthorizationTests(); // создаём объект класса Authorization чтобы его использовать
+    AuthorizationPageTests authorization = new AuthorizationPageTests(); // создаём объект класса Authorization чтобы его использовать
 
     @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
     public ActivityTestRule<AppActivity> activityTestRule =
@@ -94,6 +94,5 @@ public class ClaimsPageTests {
         onView(withId(R.id.add_new_claim_material_button)).perform(click()); // кликаем по кнопке создания заявки
         onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что отображается поле Title
     }
-
 
 }

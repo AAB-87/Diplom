@@ -30,7 +30,7 @@ import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class AuthorizationTests {
+public class AuthorizationPageTests {
 
     @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
     public ActivityTestRule<ru.iteco.fmhandroid.ui.AppActivity> activityTestRule =
