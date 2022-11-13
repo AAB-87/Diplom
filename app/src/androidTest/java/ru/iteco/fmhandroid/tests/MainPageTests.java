@@ -1,12 +1,10 @@
 package ru.iteco.fmhandroid.tests;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.doubleClick;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -15,7 +13,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
 import androidx.test.espresso.PerformException;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -91,29 +88,26 @@ public class MainPageTests {
     }
 
     @Test
-    @DisplayName("Раскрытие первой заявки")
-    public void RevealFirstClaim () {
-//        onView((withId(R.id.claim_list_recycler_view))).perform(actionOnItemAtPosition(claimPosition, swipeUp()));
-//        onView(ViewMatchers.withText("ВСЕ ЗАЯВКИ")).perform(swipeUp());
-//        onView(withIndex(withText("ВСЕ ЗАЯВКИ"), 4)).perform(scrollTo(), click());
-        onView(withIndex(withId(R.id.container_list_claim_include_on_fragment_main), 3)).perform(scrollTo(), click());
-//        onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
-//        onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // проверяем что описание заявки отображается
-
-
+    @DisplayName("Открытие четвёртой заявки")
+    public void OpenFourthClaim() {
+        onView(withId(R.id.main_swipe_refresh)).perform(swipeUp());
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
+        onView(withIndex(withId(R.id.claim_list_card), 3)).perform(click()); // с помощью утилиты находим 4ю заявку в списке и кликаем по ней
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.description_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.description_text_view)).check(matches(isDisplayed())); // проверяем что описание заявки отображается
     }
 
     @Test
     @DisplayName("Раскрытие/скрытие блока новости")
     public void RevealAndHideBlockNews() {
-        onView(withIndex(withId(R.id.expand_material_button), 0)).perform(doubleClick());
+        onView(withIndex(withId(R.id.expand_material_button), 0)).perform(doubleClick()); // кликаем по кнопке сокрытия блока новостей
         // не знаю как проверить
     }
 
     @Test
     @DisplayName("Раскрытие/скрытие блока заявки")
     public void RevealAndHideBlockClaims() {
-        onView(withIndex(withId(R.id.expand_material_button), 1)).perform(doubleClick());
+        onView(withIndex(withId(R.id.expand_material_button), 1)).perform(doubleClick()); // кликаем по кнопке сокрытия блока заявок
         // не знаю как проверить
     }
 
