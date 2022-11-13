@@ -65,7 +65,8 @@ public class NewsPageTests {
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
         onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
-        onView(withIndex(withId(R.id.news_item_material_card_view), 2)).perform(click()); // с помощью утилиты находим 3ю новость в списке и кликаем по ней
+        onView(withIndex(withId(R.id.view_news_item_image_view), 2)).perform(click()); // с помощью утилиты находим 3ю новость в списке и кликаем по ней
+        onView(withIndex(withId(R.id.news_item_material_card_view), 2)).check(matches(isDisplayed())); // ожидаем появления описания 3ей новости
     }
 
     @Test
