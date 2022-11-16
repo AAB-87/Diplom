@@ -70,15 +70,16 @@ public class NewsPageTests {
     }
 
     @Test
-    @DisplayName("Открытие сортировки списка новостей")
-    public void OpenSortNews() {
+    @DisplayName("Сортировка новостей")
+    public void SortNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
         onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.sort_news_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.sort_news_material_button)).perform(click()); // кликаем по кнопке Сортировки
-        // нужно проверить что сортировка произошла
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_date_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText("16.11.2022"))); // проверяем что сортировка
     }
 
     @Test
@@ -106,5 +107,3 @@ public class NewsPageTests {
     }
 
 }
-
-
