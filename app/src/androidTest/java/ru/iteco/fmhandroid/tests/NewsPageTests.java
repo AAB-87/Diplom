@@ -96,7 +96,7 @@ public class NewsPageTests {
 
     @Test
     @DisplayName("Открытие окна редактирования новостей")
-    public void OpenNewsEditScreen() {
+    public void OpenControlPanelScreen() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
