@@ -63,6 +63,7 @@ public class AboutAppPageTests {
         onView(withText("О приложении")).perform(click()); // кликаем по О приложении
         onView(withId(R.id.about_version_title_text_view)).check(matches(isDisplayed())); // проверяем что верстия приложения отображается
     }
+
     @Test
     @DisplayName("Проверка версии приложения")
     public void CheckVersionApp() {

@@ -111,10 +111,29 @@ public class NewsPageTests {
         onView(withId(R.id.filter_news_title_text_view)).check(matches(withText("Фильтровать новости"))); // проверяем что фильтр открылся
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_category_text_auto_complete_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.news_item_category_text_auto_complete_text_view)).perform(click()); // кликаем по кнопке Категория
-        onView(withText("Профсоюз")).inRoot((RootMatchers.isPlatformPopup())).perform(click());
+        onView(withText("Объявление")).inRoot((RootMatchers.isPlatformPopup())).perform(click());
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.filter_button)).perform(click()); // кликаем по кнопке Фильтровать
-//        onView(withId(R.id.category_icon_image_view)).check(matches(withText("icon_advertisement.png")));
+        onView(withId(R.id.category_icon_image_view)).check(matches(withText("icon_advertisement.png")));
+
+    }
+
+    @Test
+    @DisplayName("Фильтрация новостей по дате")
+    public void FilterNewsByDate() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
+        onView(withText("Новости")).perform(click()); // кликаем по Новости
+        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_news_material_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.filter_news_material_button)).perform(click()); // кликаем по кнопке Сортировка
+        onView(withId(R.id.filter_news_title_text_view)).check(matches(withText("Фильтровать новости"))); // проверяем что фильтр открылся
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_publish_date_start_text_input_edit_text), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.news_item_publish_date_start_text_input_edit_text)).perform(click()); // кликаем по полю ввода даты
+        // нужно выбрать дату в календаре
+        onView(withText("17")).inRoot((RootMatchers.isPlatformPopup())).perform(click());
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.filter_button)).perform(click()); // кликаем по кнопке ОК
 
     }
 
