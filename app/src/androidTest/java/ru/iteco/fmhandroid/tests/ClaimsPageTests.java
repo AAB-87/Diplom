@@ -100,7 +100,7 @@ public class ClaimsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 10000)); // ожидаем появление нужного элемента
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю новость в списке и кликаем по ней
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_icon_image_view), 10000)); // ожидаем появление нужного элемента
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_label_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.status_label_text_view)).check(matches(withText("Открыта"))); // проверяем что заявка открыта
     }
 
@@ -109,10 +109,11 @@ public class ClaimsPageTests {
     public void OpenCreateClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("Заявки")).perform(click()); // кликаем по Новости
+        onView(withText("Заявки")).perform(click()); // кликаем по Заявки
         onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что страница заявок отображается
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filters_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_new_claim_material_button)).perform(click()); // кликаем по кнопке создания заявки
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_edit_text), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что отображается поле Title
     }
 
