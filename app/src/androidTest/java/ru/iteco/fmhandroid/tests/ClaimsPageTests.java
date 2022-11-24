@@ -117,4 +117,34 @@ public class ClaimsPageTests {
         onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что отображается поле Title
     }
 
+    String emptyTitle = "no";
+    String title = "Убрать мусор";
+    String emptyExecutor = "no";
+    String withExecutorChoice = "yes";
+    String chosenExecutor = "Смирнов Петр Петрович";
+    String executor = "no";
+    String emptyDate = "no";
+    String emptyTime = "no";
+    String withDialPadOrTextInput = "dial";
+    String saveOrCancelTime = "save";
+    String emptyDescription = "no";
+    String description = "Убрать мусор в столовой";
+
+    @Test
+    @DisplayName("Создание заявки")
+    public void CreateClaims() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
+        onView(withText("Заявки")).perform(click()); // кликаем по Заявки
+        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что страница заявок отображается
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filters_material_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.add_new_claim_material_button)).perform(click()); // кликаем по кнопке создания заявки
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_edit_text), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что отображается поле Title
+        FillInFieldsForCreateClaims.FillInFieldsClaims(emptyTitle,title,emptyExecutor,withExecutorChoice,chosenExecutor,executor,emptyDate,emptyTime,withDialPadOrTextInput,saveOrCancelTime,emptyDescription,description);
+        onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_new_claim_material_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.add_new_claim_material_button)).check(matches(isDisplayed())); // проверяем что отображается кнопка создания новости
+    }
+
 }

@@ -186,7 +186,7 @@ public class NewsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_list_recycler_view), 10000)); // проверяем что отображаются новости для редактирования
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_news_image_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_news_image_view)).perform(click()); // кликаем по кнопке создания новости
-        FillInFieldsForCreateNews.FillInFields(emptyCategory, withCategoryChoice, chosenCategory, category, title, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description); // заполняем поля
+        FillInFieldsForCreateNews.FillInFieldsNews(emptyCategory, withCategoryChoice, chosenCategory, category, title, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description); // заполняем поля
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_news_image_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_news_image_view)).check(matches(isDisplayed())); // проверяем что отображается кнопка создания новости

@@ -22,9 +22,7 @@ import ru.iteco.fmhandroid.R;
 
 public class FillInFieldsForCreateNews {
 
-
-    public static void FillInFields(String emptyCategory, String choiceOfCategory, String chosenCategory, String category, String title, String emptyDate, String emptyTime, String withDialPadOrTextInput, String saveOrCancelTime, String emptyDescription, String description) {
-
+    public static void FillInFieldsNews(String emptyCategory, String choiceOfCategory, String chosenCategory, String category, String title, String emptyDate, String emptyTime, String withDialPadOrTextInput, String saveOrCancelTime, String emptyDescription, String description) {
         // позиции всех категорий
         Integer categoryPosition = null;
         if (chosenCategory == "Объявление") {
