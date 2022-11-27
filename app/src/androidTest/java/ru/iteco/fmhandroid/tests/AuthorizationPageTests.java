@@ -60,14 +60,14 @@ public class AuthorizationPageTests {
         onView(allOf(withHint("Пароль"))).perform(replaceText(validPassword)).check(matches(withText("password2"))); // вводим пароль в этот элемент
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопк входа
-        onView(withId(R.id.container_custom_app_bar_include_on_fragment_main)).check(matches(isDisplayed())); // убеждаемся что вошли в приложение, отображается ВХОСПИСЕ
+        onView(withId(R.id.container_custom_app_bar_include_on_fragment_main)).check(matches(isDisplayed())); // убеждаемся что вошли в приложение (отображается ВХОСПИСЕ)
     }
 
     @Test
     @DisplayName("Выход из аккаунта")
      public void logOutTheApplication() { // работает если пользователь не авторизован
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.authorization_image_button), 10000));
-        onView(withId(R.id.authorization_image_button)).perform(click()); // находим иконку для выхода и кликаем по ней
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.authorization_image_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.authorization_image_button)).perform(click()); // кликаем по иконке для выхода
         onView(withText("Выйти")).check(matches(isDisplayed())); // проверяем что всплывает кнопка Выйти
         onView(withText("Выйти")).perform(click()); // кликаем по всплывающей кнопке
         onView(withText("Авторизация")).check(matches(withText("Авторизация"))); // проверяем что отображается страница для входа
@@ -84,7 +84,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed())); // магия
     }
 
     @Test
@@ -96,9 +96,9 @@ public class AuthorizationPageTests {
         onView(allOf(withHint("Пароль"))).perform(replaceText(validPassword)).check(matches(withText("password2"))); // вводим пароль в этот элемент
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
-        onView(withText("Неверный логин или пароль")) // дальше магия
+        onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed())); // магия
     }
 
     @Test
@@ -109,9 +109,9 @@ public class AuthorizationPageTests {
         onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword)).check(matches(withText("password"))); // вводим пароль в этот элемент
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
-        onView(withText("Неверный логин или пароль")) // дальше магия
+        onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed())); // магия
     }
 
     @Test
@@ -121,7 +121,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Логин и пароль не могут быть пустыми"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed())); // магия
     }
 
 }

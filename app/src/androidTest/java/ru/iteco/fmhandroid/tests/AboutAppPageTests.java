@@ -78,10 +78,10 @@ public class AboutAppPageTests {
     public void ClickPrivacyPolicy() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("О приложении")).perform(click()); // кликаем по О приложении
+        onView(withText("О приложении")).perform(click()); // кликаем по кнопке О приложении
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.about_privacy_policy_value_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.about_privacy_policy_value_text_view)).perform(click()); // кликаем по ссылке Политика конфиденциальности
-        intended(allOf(hasData("https://vhospice.org/#/privacy-policy/"), hasAction(Intent.ACTION_VIEW))); // переход по ссылке
+        intended(allOf(hasData("https://vhospice.org/#/privacy-policy/"), hasAction(Intent.ACTION_VIEW))); // переход по ссылке, открытие браузера
     }
 
     @Test
@@ -89,10 +89,10 @@ public class AboutAppPageTests {
     public void ClickUserAgreement() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("О приложении")).perform(click()); // кликаем по О приложении
+        onView(withText("О приложении")).perform(click()); // кликаем по кнопке О приложении
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.about_terms_of_use_value_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.about_terms_of_use_value_text_view)).perform(click()); // кликаем по ссылке Пользовательское соглашение
-        intended(allOf(hasData("https://vhospice.org/#/terms-of-use"), hasAction(Intent.ACTION_VIEW))); // переход по ссылке
+        intended(allOf(hasData("https://vhospice.org/#/terms-of-use"), hasAction(Intent.ACTION_VIEW))); // переход по ссылке, открытие браузера
     }
 
     @Test
@@ -100,9 +100,9 @@ public class AboutAppPageTests {
     public void CheckCompanyNameAndYear() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("О приложении")).perform(click()); // кликаем по О приложении
+        onView(withText("О приложении")).perform(click()); // кликаем по кнопке О приложении
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.about_company_info_label_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.about_company_info_label_text_view)).check(matches(withText("© Айтеко, 2022"))); // кликаем по ссылке Пользовательское соглашение
+        onView(withId(R.id.about_company_info_label_text_view)).check(matches(withText("© Айтеко, 2022"))); // проверяем соответствие
     }
 
 }

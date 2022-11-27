@@ -158,8 +158,8 @@
             app:layout_constraintTop_toBottomOf="@id/plan_date_material_text_view" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="11dp"
+            android:layout_height="12dp"
             android:layout_marginTop="@dimen/padding_between_elements"
             android:src="@drawable/ic_gray_triangle_arrow"
             app:layout_constraintEnd_toEndOf="parent"

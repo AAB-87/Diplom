@@ -3,13 +3,13 @@ package ru.iteco.fmhandroid.tests;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.doubleClick;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static org.hamcrest.Matchers.not;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
 import androidx.test.espresso.PerformException;
@@ -75,8 +75,8 @@ public class MainPageTests {
     @DisplayName("Переход во все заявки")
     public void GoToClaimsBlock() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.container_list_news_include_on_fragment_main), 10000)); // ожидаем появление нужного элемента
-        onView(withText("Заявки")).check(matches(isDisplayed())); // проверяем что заголовок Новости отображается
-        onView(withText("ВСЕ ЗАЯВКИ")).perform(click()); // кликаем по Все Новости
+        onView(withText("Заявки")).check(matches(isDisplayed())); // проверяем что заголовок Заявки отображается
+        onView(withText("ВСЕ ЗАЯВКИ")).perform(click()); // кликаем по Все Заявки
         onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что страница заявок отображается
     }
 
@@ -90,25 +90,25 @@ public class MainPageTests {
     @Test
     @DisplayName("Открытие четвёртой заявки")
     public void OpenFourthClaim() {
-        onView(withId(R.id.main_swipe_refresh)).perform(swipeUp());
+        onView(withId(R.id.main_swipe_refresh)).perform(swipeUp()); // прокручиваем страницу для видимости нужного элемента
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.claim_list_card), 3)).perform(click()); // с помощью утилиты находим 4ю заявку в списке и кликаем по ней
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.description_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.description_text_view)).check(matches(isDisplayed())); // проверяем что описание заявки отображается
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // проверяем что заголовок заявки отображается
     }
 
     @Test
-    @DisplayName("Раскрытие/скрытие блока новости")
-    public void RevealAndHideBlockNews() {
-        onView(withIndex(withId(R.id.expand_material_button), 0)).perform(doubleClick()); // кликаем по кнопке сокрытия блока новостей
-        // не знаю как проверить
+    @DisplayName("Скрытие блока новости")
+    public void HideBlockNews() {
+        onView(withIndex(withId(R.id.expand_material_button), 0)).perform(click()); // кликаем по кнопке сокрытия блока новостей
+        onView(withIndex(withId(R.id.news_item_description_text_view), 0)).check(matches(not(isDisplayed()))); // проверяем что последние созданные новости не отображаются
     }
 
     @Test
-    @DisplayName("Раскрытие/скрытие блока заявки")
-    public void RevealAndHideBlockClaims() {
-        onView(withIndex(withId(R.id.expand_material_button), 1)).perform(doubleClick()); // кликаем по кнопке сокрытия блока заявок
-        // не знаю как проверить
+    @DisplayName("Скрытие блока заявок")
+    public void HideBlockClaims() {
+        onView(withIndex(withId(R.id.expand_material_button), 1)).perform(click()); // кликаем по кнопке сокрытия блока заявок
+        onView(withIndex(withId(R.id.description_material_text_view), 0)).check(matches(not(isDisplayed()))); // проверяем что последние созданные заявки не отображаются
     }
 
     @Test
