@@ -209,23 +209,22 @@ public class ClaimsPageTests {
 
     @Test
     @DisplayName("Редактирование комменария")
-    public void EditComment() {
+    public void EditComment() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Заявки")).perform(click()); // кликаем по Заявки
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_swipe_refresh), 10000)); // проверяем что отображается список заявок
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
-        ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
-        onView(withIndex(withId(R.id.edit_comment_image_button), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
-        onView(withId(R.id.edit_comment_image_button)).perform(click()); // кликаем по кнопке редактирования комментария
-        onView(withId(R.id.editText)).perform(replaceText("Отредактированный")); // редактируем комментарий
+        Thread.sleep(10000);
+        onView(withIndex(withId(R.id.edit_comment_image_button), 0)).perform(click()); // с помощью утилиты находим кнопку редактирования для 1го комментария в списке и кликаем по ней
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Комментарий")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Комментарий"))).perform(replaceText("Отредактированный 1")); // вписываем комментарий
         onView(withId(R.id.save_button)).check(matches(isDisplayed())); // убеждаемся что кнопка Сохранить видна
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
+        Thread.sleep(10000);
         onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // убеждаемся что заголовок открытой Заявки отображается
-        ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
-        onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
-        onView(withText("Отредактированный")).check(matches(isDisplayed())); // проверяем что комментарий отображается
+        onView(withText("Отредактированный 1")).check(matches(isDisplayed())); // проверяем что комментарий отображается
     }
 
     @Test
