@@ -7,9 +7,11 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static org.hamcrest.Matchers.allOf;
 import static ru.iteco.fmhandroid.utils.SwipeActions.ViewAfterSwipe;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
@@ -182,7 +184,7 @@ public class ClaimsPageTests {
     }
 
     @Test
-    @DisplayName("Добавление комментария")
+    @DisplayName("Добавление комментария") // поменять комментарий перед закпуском
     public void AddComment() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
@@ -195,14 +197,14 @@ public class ClaimsPageTests {
         Thread.sleep(10000);
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_comment_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_comment_image_button)).perform(click()); // кликаем по кнопке добавления комментария
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.comment_text_input_layout), 10000)); // ожидаем появление нужного элемента
-        Thread.sleep(10000);
-        onView(withId(R.id.comment_text_input_layout)).perform(typeText("Новый коммент")); // вписываем комментарий
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Комментарий")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Комментарий"))).perform(replaceText("Комментарий 4")); // вписываем комментарий
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
+        Thread.sleep(10000);
         onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // убеждаемся что заголовок открытой Заявки отображается
-        ViewAfterSwipe(onView(withText("Новый коммент")), 4, true); // свайпаем вниз до последнего комментария
+        ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
         onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
-        onView(withText("Новый коммент")).check(matches(isDisplayed())); // проверяем что комментарий отображается
+        onView(withText("Комментарий 6")).check(matches(isDisplayed())); // проверяем что комментарий отображается
     }
 
     @Test
