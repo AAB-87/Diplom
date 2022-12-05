@@ -234,16 +234,19 @@ public class ClaimsPageTests {
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Заявки")).perform(click()); // кликаем по Заявки
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_swipe_refresh), 10000)); // проверяем что отображается список заявок
+
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filters_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.filters_material_button)).perform(click()); // кликаем по кнопке открытия окна фильтрации
         onView(withId(R.id.claim_filter_dialog_title)).check(matches(isDisplayed())); // проверяем что окно Фильтрация отображается
+
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.item_filter_open), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.item_filter_in_progress)).perform(click()); // убираем галочку с чек-бокса В работе
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_filter_ok_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.claim_list_filter_ok_material_button)).perform(click()); // кликаем по кнопке ОК
         Thread.sleep(10000);
-        ViewAfterSwipe(onView(withText("Для смены статуса")), 2, true); // свайпаем вниз до заявки с заголовком Для смены статуса
-        onView(withText("Для смены статуса")).perform(click()); // кликаем по заявке
+
+        ViewAfterSwipe(onView(withText("Для смены статуса 1")), 2, true); // свайпаем вниз до заявки с заголовком Для смены статуса
+        onView(withText("Для смены статуса 1")).perform(click()); // кликаем по заявке
         onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // убеждаемся что заголовок открытой Заявки отображается
 
         ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
@@ -252,8 +255,8 @@ public class ClaimsPageTests {
         onView(withText("В работу")).perform(click()); // меняем статус на В работу
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.close_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.close_image_button)).perform(click()); // кликаем по кнопке выхода из заявки
-        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что страница заявок отображается
 
+        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что страница заявок отображается
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filters_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.filters_material_button)).perform(click()); // кликаем по кнопке открытия окна фильтрации
         onView(withId(R.id.claim_filter_dialog_title)).check(matches(isDisplayed())); // проверяем что окно Фильтрация отображается
@@ -266,9 +269,10 @@ public class ClaimsPageTests {
 
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 10000)); // проверяем что отображается список заявок
 //        Необходимо найти заявку с обновлённым статусом
+//        onData(allOf(is(instanceOf(String.class)), startsWith("Apple"))).perform(click())
 
-        ViewAfterSwipe(onView(withText("Для смены статуса")), 2, true); // свайпаем вниз до заявки с заголовком Для смены статуса
-        onView(withText("Для смены статуса")).perform(click()); // кликаем по заявке
+        ViewAfterSwipe(onView(withText("Для смены статуса 1")), 2, true); // свайпаем вниз до заявки с заголовком Для смены статуса
+        onView(withText("Для смены статуса 1")).perform(click()); // кликаем по заявке
         onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // убеждаемся что заголовок открытой Заявки отображается
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_processing_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.status_processing_image_button)).check(matches(withText("В работе"))); // проверяем что заявка имеет статус В работе
