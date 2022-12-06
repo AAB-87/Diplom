@@ -15,15 +15,18 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
+import androidx.test.espresso.PerformException;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.utils.StartApp;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
@@ -45,10 +48,14 @@ public class AuthorizationPageTests {
     // ViewActions - производим действие с элементом
     // ViewAssertions - проверяем состояние найденного элемента
 
-    @Test
-    @DisplayName("Проверяем что приложение запускается и отображается окно для авторизации")
-    public void logInToTheApp() {
-        onView(isRoot()).perform(ViewActions.waitElement(withText("Авторизация"), 10000)); // ожидаем появление нужного элемента
+    @Before
+    public void isAuthorization() throws InterruptedException {
+        try {
+            onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем окно авторизации
+        } catch (PerformException e) { // если окно не отображается (пользователь авторизирован), ловит ошибку кладёт её в ячеёку e (e сокращённо Exception) и программа не "умирает"
+            StartApp.logOutTheApplication(); // осуществляем выход из приложения
+        }
+        Thread.sleep(7000);
     }
 
     @Test
@@ -61,16 +68,6 @@ public class AuthorizationPageTests {
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопк входа
         onView(withId(R.id.container_custom_app_bar_include_on_fragment_main)).check(matches(isDisplayed())); // убеждаемся что вошли в приложение (отображается ВХОСПИСЕ)
-    }
-
-    @Test
-    @DisplayName("Выход из аккаунта")
-     public void logOutTheApplication() { // работает если пользователь не авторизован
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.authorization_image_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.authorization_image_button)).perform(click()); // кликаем по иконке для выхода
-        onView(withText("Выйти")).check(matches(isDisplayed())); // проверяем что всплывает кнопка Выйти
-        onView(withText("Выйти")).perform(click()); // кликаем по всплывающей кнопке
-        onView(withText("Авторизация")).check(matches(withText("Авторизация"))); // проверяем что отображается страница для входа
     }
 
     @Test

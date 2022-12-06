@@ -5,8 +5,10 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
 import androidx.test.espresso.PerformException;
@@ -21,6 +23,7 @@ import org.junit.runner.RunWith;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
+import ru.iteco.fmhandroid.utils.StartApp;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
@@ -39,14 +42,14 @@ public class OurMissionPageTest {
     // ViewAssertions - проверяем состояние найденного элемента
 
     @Before
-    public void IsAuthorizationScreenOpen() throws InterruptedException { // проверяем состояние приложения перед запуском тестов
+    public void isAuthorization() throws InterruptedException {
         try {
-            authorization.logInToTheApp(); // открывается ли окно авторизации
-        } catch (PerformException e) { // если нет, ловит ошибку кладёт её в ячеёку e (e сокращённо Exception) и программа не "умирает"
-            return; // значит уже авторизован
+            onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем окно авторизации
+        } catch (PerformException e) { // если окно не отображается (пользователь авторизирован), ловит ошибку кладёт её в ячеёку e (e сокращённо Exception) и программа не "умирает"
+            StartApp.logOutTheApplication(); // осуществляем выход из приложения
         }
-        authorization.logInWithValidData(); // если да, то логинится
-        Thread.sleep(5500);
+        StartApp.logInWithValidData(); // если окно отображается, входим в приложение
+        Thread.sleep(7000);
     }
 
     @Test

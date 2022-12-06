@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.tests;
+package ru.iteco.fmhandroid.utils;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
