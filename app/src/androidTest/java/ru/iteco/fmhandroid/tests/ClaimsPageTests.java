@@ -105,9 +105,9 @@ public class ClaimsPageTests {
         onView(withId(R.id.claim_list_filter_ok_material_button)).perform(click()); // кликаем по кнопке ОК
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 10000)); // проверяем что отображается список заявок
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
+        Thread.sleep(10000);
         onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_label_text_view), 10000)); // ожидаем появление нужного элемента
-        Thread.sleep(7000);
         onView(withId(R.id.status_label_text_view)).check(matches(withText("В работе"))); // проверяем что заявка имеет статус В работе
     }
 
@@ -126,7 +126,7 @@ public class ClaimsPageTests {
 
     @Test
     @DisplayName("Создание заявки")
-    public void CreateClaims() {
+    public void CreateClaims() throws InterruptedException {
         String emptyTitle = "no";
         String title = "Убрать мусор";
         String emptyExecutor = "no";
@@ -149,7 +149,9 @@ public class ClaimsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_edit_text), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что отображается поле Title
         FillInFieldsForCreateClaims.FillInFieldsClaims(emptyTitle, title, emptyExecutor, withExecutorChoice, chosenExecutor, executor, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description); // Заполняем поля для создания Заявки
+        Thread.sleep(7000);
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
+        Thread.sleep(7000);
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_new_claim_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_new_claim_material_button)).check(matches(isDisplayed())); // проверяем что отображается кнопка создания новости
     }
@@ -199,13 +201,14 @@ public class ClaimsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_comment_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_comment_image_button)).perform(click()); // кликаем по кнопке добавления комментария
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Комментарий")), 10000)); // ожидаем появление нужного элемента
-        onView(allOf(withHint("Комментарий"))).perform(replaceText("Комментарий 4")); // вписываем комментарий
+        onView(allOf(withHint("Комментарий"))).perform(replaceText("Комментарий 1")); // вписываем комментарий
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(10000);
         onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // убеждаемся что заголовок открытой Заявки отображается
-        ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
+
+//        ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
         onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
-        onView(withText("Комментарий 6")).check(matches(isDisplayed())); // проверяем что комментарий отображается
+        onView(withText("Комментарий 1")).check(matches(isDisplayed())); // проверяем что комментарий отображается
     }
 
     @Test
