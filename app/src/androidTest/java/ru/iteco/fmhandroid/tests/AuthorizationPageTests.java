@@ -16,7 +16,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 import androidx.test.espresso.PerformException;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import org.junit.Before;
@@ -24,12 +23,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.utils.StartApp;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
-@RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
+@RunWith(AllureAndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
 public class AuthorizationPageTests {
 

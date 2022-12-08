@@ -15,9 +15,9 @@ import static ru.iteco.fmhandroid.utils.SwipeActions.ViewAfterSwipe;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
 import androidx.test.espresso.PerformException;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 
@@ -31,7 +31,7 @@ import ru.iteco.fmhandroid.utils.FillInFieldsForCreateClaims;
 import ru.iteco.fmhandroid.utils.StartApp;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
-@RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
+@RunWith(AllureAndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
 public class ClaimsPageTests {
 

@@ -12,27 +12,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.rule.ActivityTestRule;
-
-import org.junit.Rule;
-import org.junit.runner.RunWith;
-
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 
-@RunWith(AndroidJUnit4.class) // чтобы класс запускался как набор тестов
-
 public class StartApp {
-
-    @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
-    public ActivityTestRule<ru.iteco.fmhandroid.ui.AppActivity> activityTestRule =
-            new ActivityTestRule<>(ru.iteco.fmhandroid.ui.AppActivity.class);
-
-    // Общие правила
-    // ViewMatcher - находим, определяем элемент в иерархии
-    // ViewActions - производим действие с элементом
-    // ViewAssertions - проверяем состояние найденного элемента
 
     @DisplayName("Авторизация с валидными данными")
     public static void logInWithValidData() { // падает если пользователь авторизирован
