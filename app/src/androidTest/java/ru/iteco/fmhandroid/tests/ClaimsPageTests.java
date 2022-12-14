@@ -4,6 +4,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToHolder;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
@@ -15,6 +16,7 @@ import static ru.iteco.fmhandroid.utils.SwipeActions.ViewAfterSwipe;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
 import androidx.test.espresso.PerformException;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.rule.ActivityTestRule;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
@@ -131,7 +133,7 @@ public class ClaimsPageTests {
         String title = "Убрать мусор";
         String emptyExecutor = "no";
         String withExecutorChoice = "yes";
-        String chosenExecutor = "Смирнов Петр Петрович";
+        String chosenExecutor = "Ivanov Ivan Ivanovich";
         String executor = "no";
         String emptyDate = "no";
         String emptyTime = "no";
@@ -158,12 +160,12 @@ public class ClaimsPageTests {
 
     @Test
     @DisplayName("Редактирование заявки")
-    public void EditClaim() {
+    public void EditClaim() throws InterruptedException {
         String emptyTitle = "no";
         String title = "Отредактированный";
         String emptyExecutor = "no";
         String withExecutorChoice = "yes";
-        String chosenExecutor = "Смирнов Петр Петрович";
+        String chosenExecutor = "Ivanov Ivan Ivanovich";
         String executor = "no";
         String emptyDate = "no";
         String emptyTime = "no";
@@ -181,6 +183,7 @@ public class ClaimsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_edit_text), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что отображается поле Title
         FillInFieldsForCreateClaims.FillInFieldsClaims(emptyTitle, title, emptyExecutor, withExecutorChoice, chosenExecutor, executor, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description); // Заполняем поля для создания Заявки
+        Thread.sleep(7000);
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_new_claim_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_new_claim_material_button)).check(matches(isDisplayed())); // проверяем что отображается кнопка создания новости
@@ -196,30 +199,28 @@ public class ClaimsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
         Thread.sleep(10000);
-        ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
-        Thread.sleep(10000);
+//        ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
+//        Thread.sleep(10000);
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_comment_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_comment_image_button)).perform(click()); // кликаем по кнопке добавления комментария
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Комментарий")), 10000)); // ожидаем появление нужного элемента
         onView(allOf(withHint("Комментарий"))).perform(replaceText("Комментарий 1")); // вписываем комментарий
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(10000);
-        onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // убеждаемся что заголовок открытой Заявки отображается
-
 //        ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
-        onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
+//        onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
         onView(withText("Комментарий 1")).check(matches(isDisplayed())); // проверяем что комментарий отображается
     }
 
     @Test
-    @DisplayName("Редактирование комменария") // поменять комментарий перед закпуском
+    @DisplayName("Редактирование комменария") // поменять комментарий перед запуском
     public void EditComment() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Заявки")).perform(click()); // кликаем по Заявки
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_swipe_refresh), 10000)); // проверяем что отображается список заявок
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
+        onView(withIndex(withId(R.id.claim_list_card), 1)).perform(click()); // с помощью утилиты находим 2ю заявку в списке и кликаем по ней
         Thread.sleep(10000);
         onView(withIndex(withId(R.id.edit_comment_image_button), 0)).perform(click()); // с помощью утилиты находим кнопку редактирования для 1го комментария в списке и кликаем по ней
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Комментарий")), 10000)); // ожидаем появление нужного элемента
@@ -249,6 +250,7 @@ public class ClaimsPageTests {
         onView(withId(R.id.claim_list_filter_ok_material_button)).perform(click()); // кликаем по кнопке ОК
         Thread.sleep(10000);
 
+//        onView(withId(R.id.title_text_view)).perform(RecyclerViewActions.scrollToHolder("Для смены статуса 1")));
         ViewAfterSwipe(onView(withText("Для смены статуса 1")), 2, true); // свайпаем вниз до заявки с заголовком Для смены статуса
         onView(withText("Для смены статуса 1")).perform(click()); // кликаем по заявке
         onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // убеждаемся что заголовок открытой Заявки отображается
@@ -281,5 +283,6 @@ public class ClaimsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_processing_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.status_processing_image_button)).check(matches(withText("В работе"))); // проверяем что заявка имеет статус В работе
     }
+
 
 }

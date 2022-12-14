@@ -4,6 +4,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
@@ -11,6 +12,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
@@ -84,10 +86,10 @@ public class MainPageTests {
     }
 
     @Test
-    @DisplayName("Раскрытие второй новости")
-    public void RevealSecondNews() {
-        onView(withIndex(withId(R.id.news_item_material_card_view), 1)).perform(click()); // с помощью утилиты находим 2ю новость в списке и кликаем по ней
-        onView(withIndex(withId(R.id.news_item_description_text_view), 1)).check(matches(isDisplayed())); // проверяем что описание новости отображается
+    @DisplayName("Раскрытие первой новости")
+    public void RevealFirstNews() {
+        onView(withIndex(withId(R.id.news_item_material_card_view), 0)).perform(click()); // с помощью утилиты находим 1ю новость в списке и кликаем по ней
+        onView(withIndex(withId(R.id.news_item_description_text_view), 0)).check(matches(isDisplayed())); // проверяем что описание новости отображается
     }
 
     @Test
@@ -120,6 +122,23 @@ public class MainPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_new_claim_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_new_claim_material_button)).perform(click()); // кликаем по кнопке создания заявки
         onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что страница создания заявки отображается
+    }
+
+    @Test
+    @DisplayName("Отмена создания заявки")
+    public void CancelCreateClaim() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_new_claim_material_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.add_new_claim_material_button)).perform(click()); // кликаем по кнопке создания заявки
+        onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что страница создания заявки отображается
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.cancel_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.cancel_button)).perform(click()); // кликаем по кнопке отмена
+        onView(withText("Изменения не будут сохранены. Вы действительно хотите выйти?"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // магия
+        onView(isRoot()).perform(ViewActions.waitElement(withId(android.R.id.button1), 10000)); // ожидаем появление нужного элемента
+        onView(withId(android.R.id.button1)).perform(click()); // кликаем по кнопке OK
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.our_mission_image_button), 10000)); // ожидаем появления нужного элемента
+        onView(withId(R.id.our_mission_image_button)).check(matches(isDisplayed())); // проверяем что отображается кнопка входа в Наша миссия
     }
 
 }

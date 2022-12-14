@@ -35,7 +35,7 @@ public class FillInFieldsForCreateClaims {
     public static void FillInFieldsClaims(String emptyTitle, String title, String emptyExecutor, String choiceOfExecutor, String chosenExecutor, String executor, String emptyDate, String emptyTime, String withDialPadOrTextInput, String saveOrCancelTime, String emptyDescription, String description) {
         // позиции всех исполнителей
         Integer executorPosition = null;
-        if (chosenExecutor == "Смирнов Петр Петрович") {
+        if (chosenExecutor == "Ivanov Ivan Ivanovich") {
             executorPosition = 0;
         } else if (chosenExecutor == "Иванов Данил Данилович") {
             executorPosition = 1;

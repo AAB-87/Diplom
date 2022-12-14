@@ -48,3 +48,7 @@ captures/
 
 ### Gradle ###
 !gradle/wrapper/gradle-wrapper.jar
+
+### Allure ###
+allure-report/
+allure-results/

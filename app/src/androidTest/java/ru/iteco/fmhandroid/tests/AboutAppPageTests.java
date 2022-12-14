@@ -63,7 +63,7 @@ public class AboutAppPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("О приложении")).perform(click()); // кликаем по О приложении
-        onView(withId(R.id.about_version_title_text_view)).check(matches(isDisplayed())); // проверяем что верстия приложения отображается
+        onView(withId(R.id.about_version_title_text_view)).check(matches(isDisplayed())); // проверяем что версия приложения отображается
     }
 
     @Test
@@ -76,7 +76,7 @@ public class AboutAppPageTests {
     }
 
     @Test
-    @DisplayName("Переход по ссылке Политики конфиденциальности")
+    @DisplayName("Переход по ссылке Политики конфиденциальности") // БАГ
     public void ClickPrivacyPolicy() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
@@ -87,7 +87,7 @@ public class AboutAppPageTests {
     }
 
     @Test
-    @DisplayName("Переход по ссылке Пользовательское соглашение")
+    @DisplayName("Переход по ссылке Пользовательское соглашение") // БАГ
     public void ClickUserAgreement() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
@@ -98,7 +98,7 @@ public class AboutAppPageTests {
     }
 
     @Test
-    @DisplayName("Проверка названия производителия и года создания приложения")
+    @DisplayName("Проверка имени производителя и года создания приложения")
     public void CheckCompanyNameAndYear() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню

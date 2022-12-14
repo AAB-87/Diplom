@@ -42,6 +42,11 @@ public class AuthorizationPageTests {
     String validPassword = "password2";
     String invalidLogin = "5login";
     String invalidPassword = "password";
+    String invalidLogin50 = "Cinderella lives with her stepmother and sisters((";
+    String invalidPassword50 = "She working all day while her sisters do nothing((";
+    String validLoginUp = "LOGIN2";
+    String validPasswordUp = "PASSWORD2";
+
 
     // Общие правила
     // ViewMatcher - находим, определяем элемент в иерархии
@@ -60,11 +65,11 @@ public class AuthorizationPageTests {
 
     @Test
     @DisplayName("Авторизация с валидными данными")
-    public void logInWithValidData() { // падает если пользователь авторизирован
+    public void logInWithValidData() {
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
-        onView(allOf(withHint("Логин"))).perform(replaceText(validLogin)).check(matches(withText("login2"))); // вводим логин в этот элемент
+        onView(allOf(withHint("Логин"))).perform(replaceText(validLogin)).check(matches(withText("login2"))); // вводим логин
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
-        onView(allOf(withHint("Пароль"))).perform(replaceText(validPassword)).check(matches(withText("password2"))); // вводим пароль в этот элемент
+        onView(allOf(withHint("Пароль"))).perform(replaceText(validPassword)).check(matches(withText("password2"))); // вводим пароль
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопк входа
         onView(withId(R.id.container_custom_app_bar_include_on_fragment_main)).check(matches(isDisplayed())); // убеждаемся что вошли в приложение (отображается ВХОСПИСЕ)
@@ -72,11 +77,11 @@ public class AuthorizationPageTests {
 
     @Test
     @DisplayName("Вход с НЕвалидными логин и пароль")
-    public void logInWithInValidData() { // падает если пользователь авторизован
+    public void logInWithInValidData() {
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
-        onView(allOf(withHint("Логин"))).perform(replaceText(invalidLogin)).check(matches(withText("5login"))); // вводим логин в этот элемент
+        onView(allOf(withHint("Логин"))).perform(replaceText(invalidLogin)).check(matches(withText("5login"))); // вводим логин
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
-        onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword)).check(matches(withText("password"))); // вводим пароль в этот элемент
+        onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword)).check(matches(withText("password"))); // вводим пароль
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Неверный логин или пароль"))
@@ -86,11 +91,11 @@ public class AuthorizationPageTests {
 
     @Test
     @DisplayName("Вход с НЕвалидными логином и валидным паролем")
-    public void logInWithInValidLoginAndValidPassword() { // падает если пользователь авторизован
+    public void logInWithInValidLoginAndValidPassword() {
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
-        onView(allOf(withHint("Логин"))).perform(replaceText(invalidLogin)).check(matches(withText("5login"))); // вводим логин в этот элемент
+        onView(allOf(withHint("Логин"))).perform(replaceText(invalidLogin)).check(matches(withText("5login"))); // вводим логин
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
-        onView(allOf(withHint("Пароль"))).perform(replaceText(validPassword)).check(matches(withText("password2"))); // вводим пароль в этот элемент
+        onView(allOf(withHint("Пароль"))).perform(replaceText(validPassword)).check(matches(withText("password2"))); // вводим пароль
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Неверный логин или пароль"))
@@ -100,10 +105,10 @@ public class AuthorizationPageTests {
 
     @Test
     @DisplayName("Вход с валидным логином и НЕвалидным паролем")
-    public void logInWithValidLoginAndInvalidPassword() { // падает если пользователь авторизован
+    public void logInWithValidLoginAndInvalidPassword() {
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
-        onView(allOf(withHint("Логин"))).perform(replaceText(validLogin)).check(matches(withText("login2"))); // вводим логин в этот элемент
-        onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword)).check(matches(withText("password"))); // вводим пароль в этот элемент
+        onView(allOf(withHint("Логин"))).perform(replaceText(validLogin)).check(matches(withText("login2"))); // вводим логин
+        onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword)).check(matches(withText("password"))); // вводим пароль
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Неверный логин или пароль"))
@@ -113,10 +118,106 @@ public class AuthorizationPageTests {
 
     @Test
     @DisplayName("Вход с пустыми полями")
-    public void logInWithEmptyData() { // падает если пользователь авторизован
+    public void logInWithEmptyData() {
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withId(R.id.enter_button)), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Логин и пароль не могут быть пустыми"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // магия
+    }
+
+    @Test
+    @DisplayName("Вход с валидным логином и пустым паролем")
+    public void logInWithValidLoginAndEmptyPassword() {
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Логин"))).perform(replaceText(validLogin)).check(matches(withText("login2"))); // вводим логин
+        closeSoftKeyboard(); // скрываем клавиатуру ввода
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withText("Логин и пароль не могут быть пустыми"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // магия
+    }
+
+    @Test
+    @DisplayName("Вход с пустым логином и валидным паролем")
+    public void logInWithEmptyLoginAndValidPassword() {
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword)).check(matches(withText("password"))); // вводим пароль
+        closeSoftKeyboard(); // скрываем клавиатуру ввода
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withText("Логин и пароль не могут быть пустыми"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // магия
+    }
+
+    @Test
+    @DisplayName("Ввод НЕвалидного логина в 50 символов") // БАГ
+    public void enterInvalidLoginIn50Characters() {
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Логин"))).perform(replaceText(invalidLogin50)).check(matches(withText("Cinderella lives with her stepmother and sisters(("))); // вводим логин
+        onView(withText("Превышен лимит символов"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // магия
+    }
+
+    @Test
+    @DisplayName("Ввод НЕвалидного пароля в 50 символов") // БАГ
+    public void enterInvalidPasswordIn50Characters() {
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword50)).check(matches(withText("She working all day while her sisters do nothing(("))); // вводим логин
+        onView(withText("Превышен лимит символов"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // магия
+    }
+
+    @Test
+    @DisplayName("Вход с НЕвалидными логин и пароль более 10 раз подряд") // БАГ
+    public void logInWithInValidDataMoreThan10TimesInARow() {
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Логин"))).perform(replaceText(invalidLogin)).check(matches(withText("5login"))); // вводим логин
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword)).check(matches(withText("password"))); // вводим пароль
+        closeSoftKeyboard(); // скрываем клавиатуру ввода
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
+        onView(withText("Учётная запись пользователя заблокирована"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // магия
+    }
+
+    @Test
+    @DisplayName("Вход с валидным логином в верхнем регистре и валидным паролем")
+    public void loginValidLoginInUppercaseAndValidPassword() {
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Логин"))).perform(replaceText(validLoginUp)).check(matches(withText("LOGIN2"))); // вводим логин
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Пароль"))).perform(replaceText(validPassword)).check(matches(withText("password2"))); // вводим пароль
+        closeSoftKeyboard(); // скрываем клавиатуру ввода
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопк входа
+        onView(withText("Неверный логин или пароль"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // магия
+    }
+
+    @Test
+    @DisplayName("Вход с валидным логином и валидным паролем в верхнем регистре")
+    public void loginValidLoginAndValidPasswordInUppercase() {
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Логин"))).perform(replaceText(validLogin)).check(matches(withText("login2"))); // вводим логин
+        onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
+        onView(allOf(withHint("Пароль"))).perform(replaceText(validPasswordUp)).check(matches(withText("PASSWORD2"))); // вводим пароль
+        closeSoftKeyboard(); // скрываем клавиатуру ввода
+        onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопк входа
+        onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed())); // магия
     }
