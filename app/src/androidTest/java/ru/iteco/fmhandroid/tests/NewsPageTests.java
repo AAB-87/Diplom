@@ -43,8 +43,6 @@ public class NewsPageTests {
     public ActivityTestRule<AppActivity> activityTestRule =
             new ActivityTestRule<>(AppActivity.class);
 
-    String autofill1 = "зар";
-
     // Общие правила
     // ViewMatcher - находим, определяем элемент в иерархии
     // ViewActions - производим действие с элементом
@@ -83,19 +81,20 @@ public class NewsPageTests {
     }
 
     @Test
-    @DisplayName("Просмотр описания седьмой новости") // БАГ
-    public void ViewDescriptionsSeventhNews() {
+    @DisplayName("Просмотр описания шестой новости")
+    public void ViewDescriptionsSixthNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
         onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.view_news_item_image_view), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.view_news_item_image_view), 6)).perform(click()); // с помощью утилиты находим 3ю новость в списке и кликаем по ней
-        onView(withIndex(withId(R.id.news_item_description_text_view), 6)).check(matches(isDisplayed())); // с помощью утилиты находим описание в 7ой новости в списке и убеждаемся что оно отображается
+        onView(withIndex(withId(R.id.view_news_item_image_view), 5)).perform(click()); // с помощью утилиты находим 3ю новость в списке и кликаем по ней
+        onView(withIndex(withId(R.id.news_item_description_text_view), 5)).check(matches(isDisplayed())); // с помощью утилиты находим описание в 7ой новости в списке и убеждаемся что оно отображается
     }
 
     @Test
     @DisplayName("Сортировка новостей")
+    // перед запуском проверь что эта самая ранняя дата в списке новостей
     public void SortNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
@@ -104,6 +103,7 @@ public class NewsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.sort_news_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.sort_news_material_button)).perform(click()); // кликаем по кнопке Сортировки
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_date_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText("15.12.2022"))); // // проверяем что первая дата самая ранняя
     }
 
     @Test
@@ -139,23 +139,6 @@ public class NewsPageTests {
         onView(withIndex(withId(R.id.news_item_description_text_view), 0)).check(matches(isDisplayed())); // проверяем что описание 1ой новости отображается
     }
 
-    @DisplayName("Автозаполнение поля выбора категории при фильтрации новостей") // Не запускается
-    public void AutofillCategorySelectionFieldWhenFilteringNews() {
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("Новости")).perform(click()); // кликаем по Новости
-        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_news_material_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.filter_news_material_button)).perform(click()); // кликаем по кнопке для открытия окна фильтрации
-        onView(withId(R.id.filter_news_title_text_view)).check(matches(withText("Фильтровать новости"))); // проверяем что окно фильтрации открылось
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_category_text_auto_complete_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.news_item_category_text_auto_complete_text_view)).perform(click()); // кликаем по полю Категория
-        onView(allOf(withHint("Категория"))).perform(replaceText(autofill1)).check(matches(withText("зар"))); // вводим первые несколько букв названия нужной категории
-        onView(allOf(withHint("Зарплата"))).perform(click()); // Кликаем по появившейся категории
-        closeSoftKeyboard(); // скрываем клавиатуру ввода
-        onView(allOf(withHint("Категория"))).check(matches(withText("Зарплата"))); // проверяем что в поля Категория вписано Зарплата
-    }
-
     @Test
     @DisplayName("Фильтрация новостей по несуществующей категории") // БАГ
     public void FilterNewsByNonExistentCategory() {
@@ -174,7 +157,7 @@ public class NewsPageTests {
         onView(withId(R.id.filter_button)).perform(click()); // кликаем по кнопке Фильтровать
         onView(withText("Выбрана несуществующая категория"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -194,8 +177,7 @@ public class NewsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.cancel_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.cancel_button)).perform(click()); // кликаем по кнопке Отмена
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_title_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.news_item_title_text_view), 0)).check(matches(withText("День рождения"))); // проверяем что фильтрация НЕпроизошла
-        onView(withIndex(withId(R.id.news_item_title_text_view), 1)).check(matches(withText("Благодарность"))); // проверяем что фильтрация НЕпроизошла
+        // Тест работатет. Как проверить что изменения не произошли?
     }
 
     @Test
@@ -217,18 +199,19 @@ public class NewsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.filter_button)).perform(click()); // кликаем по кнопке Фильтровать
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_date_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText("07.12.2022"))); // проверяем что фильтрация произошла
+        onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText("17.12.2022"))); // проверяем что фильтрация произошла
     }
 
     @Test
     @DisplayName("Открытие страницы панели управления")
-    public void OpenControlPanelScreen() {
+    public void OpenControlPanelScreen() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
         onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.edit_news_material_button)).perform(click()); // кликаем по кнопке Редактирование
+        onView(withId(R.id.container_custom_app_bar_include_on_fragment_news_control_panel)).check(matches(isDisplayed())); // проверяем что открылась Панель управления
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_list_recycler_view), 10000)); // проверяем что открылась Панель управления
     }
 
@@ -276,6 +259,8 @@ public class NewsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_list_recycler_view), 10000)); // проверяем что отображается Панель урпавления
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.sort_news_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.sort_news_material_button)).perform(click()); // кликаем по кнопке сортировки
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_publication_date_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withIndex(withId(R.id.news_item_publication_date_text_view), 0)).check(matches(withText("15.12.2022"))); // проверяем что первая дата самая ранняя
     }
 
     @Test
@@ -320,7 +305,7 @@ public class NewsPageTests {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.filter_button)).perform(click()); // кликаем по кнопке Фильтровать
         Thread.sleep(7000);
-        onView(withIndex(withId(R.id.news_item_publication_date_text_view), 0)).check(matches(withText("07.12.2022"))); // проверяем что фильтрация произошла
+        onView(withIndex(withId(R.id.news_item_publication_date_text_view), 0)).check(matches(withText("17.12.2022"))); // проверяем что фильтрация произошла
     }
 
     @Test
@@ -352,41 +337,22 @@ public class NewsPageTests {
         onView(withIndex(withId(R.id.news_item_title_text_view), 0)).check(matches(withText("Праздник"))); // проверяем что фильтрация произошла
     }
 
-    @DisplayName("Автозаполнение поля выбора категории при фильтрации новостей в панели управления") // Не запускается
-    public void AutofillCategorySelectionFieldWhenFilteringNewsInControlPanel() {
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        onView(withText("Новости")).perform(click()); // кликаем по Новости
-        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_material_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.edit_news_material_button)).perform(click()); // кликаем по кнопке Редактирование
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_list_recycler_view), 10000)); // проверяем что отображается Панель управления
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_news_material_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.filter_news_material_button)).perform(click()); // кликаем по кнопке открытия окна для фильтрации
-        onView(withId(R.id.filter_news_title_text_view)).check(matches(withText("Фильтровать новости"))); // проверяем что окно для фильтрации открылось
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_category_text_auto_complete_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.news_item_category_text_auto_complete_text_view)).perform(click()); // кликаем по полю Категория
-        onView(allOf(withHint("Категория"))).perform(replaceText(autofill1)).check(matches(withText("зар"))); // вводим первые несколько букв названия нужной категории
-        onView(allOf(withHint("Зарплата"))).perform(click()); // Кликаем по появившейся категории
-        closeSoftKeyboard(); // скрываем клавиатуру ввода
-        onView(allOf(withHint("Категория"))).check(matches(withText("Зарплата"))); // проверяем что в поля Категория вписано Зарплата
-    }
-
-    String emptyCategory = "no";
-    String withCategoryChoice = "yes";
-    String chosenCategory = "Зарплата";
-    String category = "no";
-    String title = "no";
-    String emptyDate = "no";
-    String emptyTime = "no";
-    String withDialPadOrTextInput = "dial"; // ввод с помощью циферблата
-    String saveOrCancelTime = "save";
-    String emptyDescription = "no";
-    String description = "Зарплата";
-
     @Test
     @DisplayName("Создание новости")
     public void CreateNews() throws InterruptedException {
+
+        String emptyCategory = "no";
+        String withCategoryChoice = "yes";
+        String chosenCategory = "Зарплата";
+        String category = "no";
+        String title = "no";
+        String emptyDate = "no";
+        String emptyTime = "no";
+        String withDialPadOrTextInput = "dial"; // ввод с помощью циферблата
+        String saveOrCancelTime = "save";
+        String emptyDescription = "no";
+        String description = "Зарплата";
+
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по блоку Новости
@@ -454,8 +420,30 @@ public class NewsPageTests {
     }
 
     @Test
-    @DisplayName("Редактирование категории новости")
-    public void EditNewsCategory() throws InterruptedException {
+    @DisplayName("Изменение категории новости")
+    public void ChangNewsCategory() throws InterruptedException {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
+        onView(withText("Новости")).perform(click()); // кликаем по Новости
+        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_material_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.edit_news_material_button)).perform(click()); // кликаем по кнопке Редактирование
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_list_recycler_view), 10000)); // проверяем что отображается Панель управления
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_item_image_view), 10000)); // ожидаем появление нужного элемента
+        onView(withIndex(withId(R.id.edit_news_item_image_view), 1)).perform(click()); // кликаем по кнопке редактирования 2ой новости
+        onView(withId(R.id.news_item_category_text_auto_complete_text_view)).perform(click()); // кликаем по полю Категория
+        onView(allOf(withHint("Категория"))).perform(replaceText("Массаж")); // вводим новую категорию
+        closeSoftKeyboard(); // скрываем клавиатуру ввода
+        Thread.sleep(5000);
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.save_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
+        Thread.sleep(5000);
+        // Тест работатет, но проверить изменения можно только по иконке. Как проверить смену иконки?
+    }
+
+    @Test
+    @DisplayName("Изменение категории новости на несуществующую в списке")
+    public void ChangNewsCategoryToNonExistentOneInList() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Новости")).perform(click()); // кликаем по Новости
@@ -473,7 +461,7 @@ public class NewsPageTests {
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         onView(withText("Сохранение не удалось. Попробуйте позднее."))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -496,6 +484,39 @@ public class NewsPageTests {
         onView(withIndex(withId(R.id.news_item_published_text_view), 1)).check(matches(withText("Не активна"))); // проверяем что статус изменился
     }
 
+    @Test
+    @DisplayName("Редактирование даты создания новости") // перед запуском смени дату на текущую и убедись что фильтруемые категории имеются в списке новостей
+    public void EditNewsCreationDate() throws InterruptedException {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
+        onView(withText("Новости")).perform(click()); // кликаем по Новости
+        onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что страница новостей отображается
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_material_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.edit_news_material_button)).perform(click()); // кликаем по кнопке Редактирование
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_list_recycler_view), 10000)); // проверяем что отображается Панель управления
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_news_material_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.filter_news_material_button)).perform(click()); // кликаем по кнопке открытия окна для фильтрации
+        onView(withId(R.id.filter_news_title_text_view)).check(matches(withText("Фильтровать новости"))); // проверяем что окно для фильтрации открылось
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_category_text_auto_complete_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.news_item_category_text_auto_complete_text_view)).perform(click()); // кликаем по кнопке Категория
+        closeSoftKeyboard(); // скрываем клавиатуру ввода
+        onView(withText("День рождения")).inRoot((RootMatchers.isPlatformPopup())).perform(click()); // выбираем категорию
+        closeSoftKeyboard(); // скрываем клавиатуру ввода
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.filter_button)).perform(click()); // кликаем по кнопке Фильтровать
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_list_recycler_view), 10000)); // ожидаем появление нужного элемента
+        Thread.sleep(7000);
+        onView(withIndex(withId(R.id.news_item_title_text_view), 0)).check(matches(withText("День рождения"))); // проверяем что фильтрация произошла
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_item_image_view), 10000)); // ожидаем появление нужного элемента
+        onView(withIndex(withId(R.id.edit_news_item_image_view), 0)).perform(click()); // кликаем по кнопке редактирования 1ой новости
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_publish_date_text_input_edit_text), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.news_item_publish_date_text_input_edit_text)).perform(click()); // кликаем по полю ввода первой даты
+        onView(withText("ОК")).perform(click()); // кликаем по кнопке ОК
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.save_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_publication_date_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withIndex(withId(R.id.news_item_publication_date_text_view), 0)).check(matches(withText("17.12.2022"))); // проверяем что дата публикации изменилась
+    }
 
 }
 

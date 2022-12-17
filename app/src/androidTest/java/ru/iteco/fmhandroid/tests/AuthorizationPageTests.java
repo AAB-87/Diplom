@@ -86,7 +86,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -100,7 +100,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -113,7 +113,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -123,7 +123,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Логин и пароль не могут быть пустыми"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -135,7 +135,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Логин и пароль не могут быть пустыми"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -147,7 +147,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Логин и пароль не могут быть пустыми"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -157,7 +157,7 @@ public class AuthorizationPageTests {
         onView(allOf(withHint("Логин"))).perform(replaceText(invalidLogin50)).check(matches(withText("Cinderella lives with her stepmother and sisters(("))); // вводим логин
         onView(withText("Превышен лимит символов"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -167,7 +167,7 @@ public class AuthorizationPageTests {
         onView(allOf(withHint("Пароль"))).perform(replaceText(invalidPassword50)).check(matches(withText("She working all day while her sisters do nothing(("))); // вводим логин
         onView(withText("Превышен лимит символов"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -191,7 +191,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         onView(withText("Учётная запись пользователя заблокирована"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -205,7 +205,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопк входа
         onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
     @Test
@@ -219,7 +219,7 @@ public class AuthorizationPageTests {
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопк входа
         onView(withText("Неверный логин или пароль"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // магия
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
 }

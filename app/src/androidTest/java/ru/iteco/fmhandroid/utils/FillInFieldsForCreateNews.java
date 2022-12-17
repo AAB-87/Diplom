@@ -1,5 +1,6 @@
 package ru.iteco.fmhandroid.utils;
 
+import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
@@ -63,6 +64,7 @@ public class FillInFieldsForCreateNews {
         }
         // заполнение поля "Время"
         if (emptyTime == "no") {
+            closeSoftKeyboard(); // скрываем клавиатуру ввода
             if (withDialPadOrTextInput == "dial") {
                 onView(withId(R.id.news_item_publish_time_text_input_edit_text)).perform(click());
                 if (saveOrCancelTime == "save") {
@@ -80,6 +82,7 @@ public class FillInFieldsForCreateNews {
         }
         // заполнение поля "Описание"
         if (emptyDescription == "no") {
+            closeSoftKeyboard(); // скрываем клавиатуру ввода
             onView(withId(R.id.news_item_description_text_input_edit_text)).perform(replaceText(description));
             onView(withId(R.id.news_item_description_text_input_edit_text)).check(matches(withText(description)));
         }
