@@ -69,14 +69,16 @@ public class ClaimsPageTests {
     }
 
     @Test
-    @DisplayName("Просмотр второй заявки")
-    public void ViewSecondClaims() {
+    @DisplayName("Просмотр первой заявки")
+    public void ViewFirstClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Заявки")).perform(click()); // кликаем по Заявки
         onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что страница заявок отображается
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.description_material_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.description_material_text_view), 1)).perform(click()); // с помощью утилиты находим 2ю заявку в списке и кликаем по ней
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
+        onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ую заявку в списке и кликаем по ней
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.executor_name_label_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.executor_name_label_text_view)).check(matches(isDisplayed())); // проверяем что автор заявки отображается
     }
 
     @Test
@@ -127,7 +129,7 @@ public class ClaimsPageTests {
     }
 
     @Test
-    @DisplayName("Создание заявки")
+    @DisplayName("Создание заявки") // НЕ РАБОТАЕТ ПРОВЕРКА (НЕ ОТКРЫВАЕТ СОЗДАННУЮ ЗАЯВКУ)
     public void CreateClaims() throws InterruptedException {
         String emptyTitle = "no";
         String title = "Убрать мусор";
@@ -154,8 +156,23 @@ public class ClaimsPageTests {
         Thread.sleep(7000);
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(7000);
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_new_claim_material_button), 10000)); // ожидаем появление нужного элемента
-        onView(withId(R.id.add_new_claim_material_button)).check(matches(isDisplayed())); // проверяем что отображается кнопка создания новости
+        ViewAfterSwipe(onView(withText("Убрать мусор")), 2, true); // свайпаем вниз до заявки с заголовком Для смены статуса
+        onView(withText("Убрать мусор")).perform(click()); // кликаем по найденной заявки
+        Thread.sleep(7000);
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.description_material_card_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.description_material_card_view)).check(matches(isDisplayed())); // проверяем что отображается описание заявки
+    }
+
+    @Test
+    @DisplayName("Дубль")
+    public void Double() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
+        onView(withText("Заявки")).perform(click()); // кликаем по Заявки
+        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что страница заявок отображается
+        ViewAfterSwipe(onView(withText("Убрать мусор")), 2, true); // свайпаем вниз до заявки с заголовком Для смены статуса
+        onView(withText("Убрать мусор")).perform(click()); // кликаем по найденной заявки
+        onView(withId(R.id.description_material_card_view)).check(matches(isDisplayed())); // проверяем что отображается описание заявки
     }
 
     @Test
