@@ -60,14 +60,15 @@ public class FillInFieldsForCreateNews {
         // заполнение поля "Дата"
         if (emptyDate == "no") {
             onView(withId(R.id.news_item_publish_date_text_input_edit_text)).perform(click());
+            closeSoftKeyboard(); // скрываем клавиатуру ввода
             onView(withText("ОК")).perform(click());
         }
         // заполнение поля "Время"
         if (emptyTime == "no") {
-            closeSoftKeyboard(); // скрываем клавиатуру ввода
             if (withDialPadOrTextInput == "dial") {
                 onView(withId(R.id.news_item_publish_time_text_input_edit_text)).perform(click());
                 if (saveOrCancelTime == "save") {
+                    closeSoftKeyboard(); // скрываем клавиатуру ввода
                     onView(withText("ОК")).perform(click());
                 } else {
                     onView(withText("ОТМЕНА")).perform(click());

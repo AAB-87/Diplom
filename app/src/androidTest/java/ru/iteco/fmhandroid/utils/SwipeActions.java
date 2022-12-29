@@ -45,7 +45,7 @@ public class SwipeActions {
                 return false;
             }
             try {
-                locator.check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));//.check(matches(isDisplayed()));
+                locator.check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).check(matches(isDisplayed()));
                 invisible = false;
             } catch (NoMatchingViewException ignored) {
             }

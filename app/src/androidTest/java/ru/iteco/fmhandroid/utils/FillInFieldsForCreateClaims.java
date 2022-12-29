@@ -1,20 +1,14 @@
 package ru.iteco.fmhandroid.utils;
 
+import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-
-import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
 import android.widget.TimePicker;
 
@@ -22,13 +16,10 @@ import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.RootMatchers;
-import androidx.test.rule.ActivityTestRule;
 
 import org.hamcrest.Matchers;
 
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.ui.AppActivity;
-
 
 public class FillInFieldsForCreateClaims {
 
@@ -66,10 +57,12 @@ public class FillInFieldsForCreateClaims {
         // заполнение поля "Дата"
         if (emptyDate == "no") {
             onView(withId(R.id.date_in_plan_text_input_edit_text)).perform(click());
+            closeSoftKeyboard(); // скрываем клавиатуру ввода
             onView(withText("ОК")).perform(click());
         }
         // заполнение поля "Время"
         if (emptyTime == "no") {
+            closeSoftKeyboard(); // скрываем клавиатуру ввода
             if (withDialPadOrTextInput == "dial") {
                 onView(withId(R.id.time_in_plan_text_input_edit_text)).perform(click());
                 if (saveOrCancelTime == "save") {
@@ -92,32 +85,5 @@ public class FillInFieldsForCreateClaims {
         }
     }
 
-    public static void timeInput(String hours, String minutes) {
-        onView(withId(R.id.time_in_plan_text_input_edit_text)).perform(click());
-        onView(withContentDescription("Switch to text input mode for the time input.")).perform(click());
-        onView(withIndex(withClassName(is("androidx.appcompat.widget.AppCompatEditText")), 0)).perform(replaceText(hours));
-        onView(withIndex(withClassName(is("androidx.appcompat.widget.AppCompatEditText")), 1)).perform(replaceText(minutes));
-        onView(withText("ОК")).perform(click());
-    }
 
-    public static void checkMessageOfTimeInputError() {
-        onView(withText("Указано недопустимое время")).check(matches(isDisplayed()));
-    }
-
-    public static void saveClaim() {
-        onView(withId(R.id.save_button)).perform(click());
-        onView(withText("Заявки")).check(matches(isDisplayed()));
-    }
-
-    public static void cancelSavingOfClaim() {
-        onView(withId(R.id.cancel_button)).perform(click());
-        onView(withText("ОК")).perform(click());
-        onView(withText("Заявки")).check(matches(isDisplayed()));
-    }
-
-    public static void checkMessageThatFieldsShouldBeFilled(ActivityTestRule<AppActivity> activityTestRule) {
-        onView(withText(R.string.empty_fields))
-                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow()
-                        .getDecorView())))).check(matches(withText("Заполните пустые поля")));
-    }
 }
