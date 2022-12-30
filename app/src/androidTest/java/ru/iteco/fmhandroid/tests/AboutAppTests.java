@@ -41,32 +41,32 @@ public class AboutAppTests {
 
     @Test
     @DisplayName("Открытие страницы О приложении")
-    public void OpenAboutAppPage() {
+    public void shouldOpenAboutAppPage() {
         AboutAppPage.openAboutApp();
         AboutAppPageElements.viewVersion.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Проcмотр версии приложения")
-    public void ViewVersionApp() {
+    public void shouldViewVersionApp() {
         AboutAppPage.openAboutApp().checkVersionApp();
     }
 
     @Test
     @DisplayName("Переход по ссылке Политики конфиденциальности") // БАГ
-    public void ViewPrivacyPolicy() {
+    public void shouldViewPrivacyPolicy() {
         AboutAppPage.openAboutApp().clickPrivacyPolicy();
     }
 
     @Test
     @DisplayName("Переход по ссылке Пользовательское соглашение") // БАГ
-    public void ViewUserAgreement() {
+    public void shouldViewUserAgreement() {
         AboutAppPage.openAboutApp().clickUserAgreement();
     }
 
     @Test
     @DisplayName("Проcмотр имени производителя и года создания приложения")
-    public void ViewCompanyNameAndYear() {
+    public void shouldViewCompanyNameAndYear() {
         AboutAppPage.openAboutApp().checkCompanyNameAndYear();
     }
 

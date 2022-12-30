@@ -29,7 +29,7 @@ public class ClaimsData {
         public String getChangeStatusClaim;
 
         private String title = "Убрать мусор1";
-        private String descriptionEdited = "Отредактированный текст";
+        private String descriptionEdited = "Отредактированный";
         private String changeStatusClaim = "Для смены статуса";
 
 

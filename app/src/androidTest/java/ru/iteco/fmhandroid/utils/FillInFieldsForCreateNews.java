@@ -23,7 +23,7 @@ import ru.iteco.fmhandroid.R;
 
 public class FillInFieldsForCreateNews {
 
-    public static void FillInFieldsNews(String emptyCategory, String choiceOfCategory, String chosenCategory, String category, String title, String emptyDate, String emptyTime, String withDialPadOrTextInput, String saveOrCancelTime, String emptyDescription, String description) {
+    public static void FillInFieldsNews(String emptyCategory, String choiceOfCategory, String chosenCategory, String category, String title, String emptyDate, String emptyTime, String withDialPadOrTextInput, String saveOrCancelTime, String emptyDescription, String description) throws InterruptedException {
         // позиции всех категорий
         Integer categoryPosition = null;
         if (chosenCategory == "Объявление") {
@@ -61,6 +61,7 @@ public class FillInFieldsForCreateNews {
         if (emptyDate == "no") {
             onView(withId(R.id.news_item_publish_date_text_input_edit_text)).perform(click());
             closeSoftKeyboard(); // скрываем клавиатуру ввода
+            Thread.sleep(2000);
             onView(withText("ОК")).perform(click());
         }
         // заполнение поля "Время"
@@ -69,6 +70,7 @@ public class FillInFieldsForCreateNews {
                 onView(withId(R.id.news_item_publish_time_text_input_edit_text)).perform(click());
                 if (saveOrCancelTime == "save") {
                     closeSoftKeyboard(); // скрываем клавиатуру ввода
+                    Thread.sleep(2000);
                     onView(withText("ОК")).perform(click());
                 } else {
                     onView(withText("ОТМЕНА")).perform(click());

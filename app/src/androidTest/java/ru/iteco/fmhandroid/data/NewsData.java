@@ -6,15 +6,25 @@ public class NewsData {
     }
 
     public static class DataInNewsList {
-        private String today = "26.12.2022";
+        private String today = "30.12.2022";
         private String statusNotActive = "НЕ АКТИВНА";
         private String editText = "Отредактированный текст";
+        private String titleTextSalary = "Зарплата";
+        private String titleTextTradeUnion = "Профсоюз";
+        private String titleAdvertisement = "Объявление";
+        private String textNonExistentCategory = "Выбрана несуществующая категория";
+        private String saveFailedMessages = "Сохранение не удалось. Попробуйте позднее.";
 
 
-        public DataInNewsList(String today, String statusNotActive, String editText) {
+        public DataInNewsList(String today, String textNonExistentCategory, String saveFailedMessages, String statusNotActive, String editText, String titleTextSalary, String titleTextTradeUnion, String titleAdvertisement) {
             this.today = today;
             this.statusNotActive = statusNotActive;
             this.editText = editText;
+            this.titleTextSalary = titleTextSalary;
+            this.titleTextTradeUnion = titleTextTradeUnion;
+            this.titleAdvertisement = titleAdvertisement;
+            this.textNonExistentCategory = textNonExistentCategory;
+            this.saveFailedMessages = saveFailedMessages;
         }
 
         public DataInNewsList() {
@@ -31,22 +41,6 @@ public class NewsData {
         public String getEditText() {
             return editText;
         }
-
-    }
-
-    public static class Category {
-        private String titleTextSalary = "Зарплата";
-        private String titleTextTradeUnion = "Профсоюз";
-
-
-        public Category(String titleTextSalary, String titleTextTradeUnion) {
-            this.titleTextSalary = titleTextSalary;
-            this.titleTextTradeUnion = titleTextTradeUnion;
-        }
-
-        public Category() {
-        }
-
         public String getTitleTextSalary() {
             return titleTextSalary;
         }
@@ -55,21 +49,9 @@ public class NewsData {
             return titleTextTradeUnion;
         }
 
-    }
-
-    public static class Messages {
-        private String textNonExistentCategory = "Выбрана несуществующая категория";
-        private String saveFailedMessages = "Сохранение не удалось. Попробуйте позднее.";
-
-
-        public Messages(String textNonExistentCategory, String saveFailedMessages) {
-            this.textNonExistentCategory = textNonExistentCategory;
-            this.saveFailedMessages = saveFailedMessages;
+        public String getTitleAdvertisement() {
+            return titleAdvertisement;
         }
-
-        public Messages() {
-        }
-
         public String getTextNonExistentCategory() {
             return textNonExistentCategory;
         }
@@ -77,6 +59,58 @@ public class NewsData {
         public String getSaveFailedMessages() {
             return saveFailedMessages;
         }
+
     }
+
+//    public static class Category {
+//        private String titleTextSalary = "Зарплата";
+//        private String titleTextTradeUnion = "Профсоюз";
+//        private String titleAdvertisement = "Объявдение";
+//
+//
+//        public Category(String titleTextSalary, String titleTextTradeUnion, String titleAdvertisement) {
+//            this.titleTextSalary = titleTextSalary;
+//            this.titleTextTradeUnion = titleTextTradeUnion;
+//            this.titleAdvertisement = titleAdvertisement;
+//        }
+//
+//        public Category() {
+//        }
+//
+//        public String getTitleTextSalary() {
+//            return titleTextSalary;
+//        }
+//
+//        public String getTitleTextTradeUnion() {
+//            return titleTextTradeUnion;
+//        }
+//
+//        public String getTitleAdvertisement() {
+//            return titleAdvertisement;
+//        }
+//
+//    }
+
+//    public static class Messages {
+//        private String textNonExistentCategory = "Выбрана несуществующая категория";
+//        private String saveFailedMessages = "Сохранение не удалось. Попробуйте позднее.";
+//
+//
+//        public Messages(String textNonExistentCategory, String saveFailedMessages) {
+//            this.textNonExistentCategory = textNonExistentCategory;
+//            this.saveFailedMessages = saveFailedMessages;
+//        }
+//
+//        public Messages() {
+//        }
+//
+//        public String getTextNonExistentCategory() {
+//            return textNonExistentCategory;
+//        }
+//
+//        public String getSaveFailedMessages() {
+//            return saveFailedMessages;
+//        }
+//    }
 
 }

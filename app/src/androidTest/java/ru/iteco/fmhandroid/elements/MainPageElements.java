@@ -12,7 +12,7 @@ import ru.iteco.fmhandroid.R;
 
 public class MainPageElements {
 
-    public static ViewInteraction mainPage = onView(withId(R.id.about_version_title_text_view)); // проверяем что версия приложения отображается
+    public static ViewInteraction mainPage = onView(withId(R.id.container_list_news_include_on_fragment_main)); // проверяем что отображается блок новостей
     public static ViewInteraction viewNewsBlock = onView(withText("Новости")); // проверяем что заголовок Новости отображается
     public static ViewInteraction viewClaimsBlock = onView(withText("Заявки")); // проверяем что заголовок Заявки отображается
     public static ViewInteraction viewNewsList = onView(withId(R.id.container_list_news_include)); // открытие списка новостей

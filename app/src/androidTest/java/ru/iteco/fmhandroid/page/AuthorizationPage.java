@@ -30,13 +30,14 @@ public class AuthorizationPage {
         return new MainPage();
     }
 
-    public static MainPage enterValidLoginAndPassword(AuthorizationData.AuthData data) {
+    public static MainPage enterValidLoginAndPassword(AuthorizationData.AuthData data) throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
         onView(allOf(withHint("Логин"))).perform(replaceText(data.getValidLogin())); // вводим логин
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
         onView(allOf(withHint("Пароль"))).perform(replaceText(data.getValidPassword())); // вводим пароль
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопк входа
+        Thread.sleep(5000);
         return new MainPage();
     }
 

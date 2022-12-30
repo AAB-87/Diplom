@@ -2,9 +2,11 @@ package ru.iteco.fmhandroid.tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.Matchers.is;
@@ -21,6 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.data.ClaimsData;
 import ru.iteco.fmhandroid.elements.ClaimsPageElements;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
@@ -58,14 +61,14 @@ public class ClaimsTests {
 
     @Test
     @DisplayName("Открытие страницы заявки")
-    public void ShouldOpenClaimsPage() {
+    public void shouldOpenClaimsPage() {
         claims.openClaimsPage();
         element.claimsPage.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Просмотр первой заявки")
-    public void ShouldViewFirstClaims() throws InterruptedException {
+    public void shouldViewFirstClaims() throws InterruptedException {
         claims.openClaimsPage();
         Thread.sleep(2000);
         element.firstClaims.perform(click());
@@ -75,7 +78,7 @@ public class ClaimsTests {
 
     @Test
     @DisplayName("Открытие фильтра заявкок")
-    public void ShouldOpenFilterClaims() throws InterruptedException {
+    public void shouldOpenFilterClaims() throws InterruptedException {
         claims.openClaimsPage();
         Thread.sleep(2000);
         element.filterButton.perform(click());
@@ -85,7 +88,7 @@ public class ClaimsTests {
 
     @Test
     @DisplayName("Фильтрация заявкок")
-    public void ShouldFilterClaims() throws InterruptedException {
+    public void shouldFilterClaims() throws InterruptedException {
         claims.openClaimsPage();
         Thread.sleep(2000);
         element.filterButton.perform(click());
@@ -100,7 +103,7 @@ public class ClaimsTests {
 
     @Test
     @DisplayName("Фильтрация заявкок без выбора статуса")
-    public void ShouldFilterClaimsWithoutStatusSelection() throws InterruptedException {
+    public void shouldFilterClaimsWithoutStatusSelection() throws InterruptedException {
         claims.openClaimsPage();
         Thread.sleep(2000);
         element.filterButton.perform(click());
@@ -114,14 +117,14 @@ public class ClaimsTests {
 
     @Test
     @DisplayName("Открытие окна создания заявки")
-    public void ShouldOpenCreateClaimsScreen() {
+    public void shouldOpenCreateClaimsScreen() {
         claims.openCreateClaims();
         element.titleCreatePage.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Создание заявки")
-    public void ShouldCreateClaimsWithValidData() throws InterruptedException {
+    public void shouldCreateClaimsWithValidData() throws InterruptedException {
         String emptyTitle = "no";
         String title = "Убрать мусор1";
         String emptyExecutor = "no";
@@ -149,7 +152,7 @@ public class ClaimsTests {
 
     @Test
     @DisplayName("Редактирование заявки") // БАГ
-    public void ShouldEditClaim() throws InterruptedException {
+    public void shouldEditClaim() throws InterruptedException {
         claims.openClaimsPage();
         element.filterButton.perform(click());
         Thread.sleep(3000);
@@ -168,7 +171,7 @@ public class ClaimsTests {
     @Test
     @DisplayName("Добавление комментария")
     // перед запуском поменяй комментарий в 2х методах
-    public void AddComment() throws InterruptedException {
+    public void shouldAddComment() throws InterruptedException {
         claims.openClaimsPage();
         claims.openFirstClaims();
         claims.addComment();
@@ -179,79 +182,36 @@ public class ClaimsTests {
     @Test
     @DisplayName("Редактирование комменария")
     // перед запуском поменяй комментарий в 3х местах
-    public void EditComment() throws InterruptedException {
+    public void shouldEditComment() throws InterruptedException {
         claims.openClaimsPage();
         claims.openFirstClaims();
         Thread.sleep(2000);
         claims.editComment();
-        Thread.sleep(2000);
+        Thread.sleep(10000);
         element.firstComment.check(matches(isDisplayed()));
     }
 
     @Test
-    @DisplayName("Смена статуса заявки") // не кликает по заявке
-    public void ChangeStatusClaim() throws InterruptedException {
-        String emptyTitle = "no";
-        String title = "Для смены статуса";
-        String emptyExecutor = "yes";
-        String withExecutorChoice = "no";
-        String chosenExecutor = "no";
-        String executor = "no";
-        String emptyDate = "no";
-        String emptyTime = "no";
-        String withDialPadOrTextInput = "dial";
-        String saveOrCancelTime = "save";
-        String emptyDescription = "no";
-        String description = "Убрать мусор в столовой";
-
-
-//        claims.openClaimsPage();
-        // создаём заявку со статусом открыта
-        claims.openCreateClaims();
-        FillInFieldsForCreateClaims.FillInFieldsClaims(emptyTitle, title, emptyExecutor, withExecutorChoice, chosenExecutor, executor, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description);
-        Thread.sleep(3000);
-        element.saveButton.perform(click());
-        Thread.sleep(3000);
-
-        // фильтруемся по статусу открыта
+    @DisplayName("Смена статуса заявки")
+    // перед запуском необходимо убедиться что в первой заявке есть хотябы 2 комментария
+    public void shouldChangeStatusClaim() throws InterruptedException {
+        claims.openClaimsPage();
         element.filterButton.perform(click());
         element.checkBoxAtWork.perform(click());
         Thread.sleep(3000);
         element.okButton.perform(click());
-
-        // ищем и открываем заявку
-        ViewAfterSwipe(onView(withText(fields.getChangeStatusClaim)), 2, true);
-        element.claimsForChange.perform(click());
-        element.titleClaims.check(matches(isDisplayed()));
-
-        // свайпаем вниз до последнего комментария
+        Thread.sleep(3000);
+        claims.openFirstClaims();
         ViewAfterSwipe(onView(withText("Для смены статуса")), 4, true);
-
-        // меняем статус и возвращаемся в список заявок
         claims.changeStatus();
-        element.backButton.perform(click());
-
-        // фильтруемся по заявкам В работе
-        element.filterButton.perform(click());
-        Thread.sleep(3000);
-        element.checkBoxAtWork.perform(click());
-        element.checkBoxOpen.perform(click());
-        Thread.sleep(1000);
-        element.okButton.perform(click());
-        Thread.sleep(3000);
-
-        // ищем и открываем заявку
-        ViewAfterSwipe(onView(withText(fields.getChangeStatusClaim)), 2, true);
-        element.claimsForChange.perform(click());
-        element.titleClaims.check(matches(isDisplayed()));
-
-        // убеждаемся что заявка имеет статус открыта
-        element.statusField.check(matches(withText(data.getAtWorkText)));
+        onView(withId(R.id.claim_comments_list_recycler_view)).perform(swipeDown());
+        Thread.sleep(10000);
+        element.claimsStatus.check(matches(withText(data.getAtWorkText())));
     }
 
     @Test
     @DisplayName("Создание заявки с пустыми полями")
-    public void CreateClaimsWithEmptyData() throws InterruptedException {
+    public void shouldCreateClaimsWithEmptyData() throws InterruptedException {
         claims.openCreateClaims();
         element.saveButton.perform(click());
         Thread.sleep(3000);
@@ -262,14 +222,14 @@ public class ClaimsTests {
 
     @Test
     @DisplayName("Отмена создания заявки")
-    public void CancelCreateClaim() {
+    public void shouldCancelCreateClaim() {
         claims.openCreateClaims();
         element.cancelButton.perform(click());
         onView(withText(message.getConfirmationText()))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));
         claims.waitingButtonToAppear();
-        element.claimList.check(matches(isDisplayed()));
+        element.claimsPage.check(matches(isDisplayed()));
     }
 
 

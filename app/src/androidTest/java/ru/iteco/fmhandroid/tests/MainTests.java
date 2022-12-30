@@ -44,7 +44,7 @@ public class MainTests {
 
     @Test
     @DisplayName("Блок новостей и заявок отображается в главном меню")
-    public void NewsBlockAndClaimsBlockExist() {
+    public void shouldNewsBlockAndClaimsBlockExist() {
         MainPage.openMainPage();
         MainPageElements.viewNewsBlock.check(matches(isDisplayed()));
         MainPageElements.viewClaimsBlock.check(matches(isDisplayed()));
@@ -52,21 +52,21 @@ public class MainTests {
 
     @Test
     @DisplayName("Переход во все новости")
-    public void GoToNewsBlock() {
+    public void shouldGoToNewsBlock() {
         MainPage.openMainPage().goNewsBlock();
         MainPageElements.viewNewsList.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Переход во все заявки")
-    public void GoToClaimsBlock() {
+    public void shouldGoToClaimsBlock() {
         MainPage.openMainPage().goClaimsBlock();
         MainPageElements.viewClaimsList.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Раскрытие первой новости")
-    public void RevealFirstNews() {
+    public void shouldRevealFirstNews() {
         MainPage.openMainPage();
         MainPageElements.openFirstNews.perform(click());
         MainPageElements.descriptionFirstNews.check(matches(isDisplayed()));
@@ -74,13 +74,13 @@ public class MainTests {
 
     @Test
     @DisplayName("Открытие четвёртой заявки")
-    public void OpenFourthClaim() {
+    public void shouldOpenFourthClaim() {
         MainPage.openMainPage().swipeClaims().openFourthClaims().expectedTitleClaims();
     }
 
     @Test
     @DisplayName("Скрытие блока новости")
-    public void HideBlockNews() {
+    public void shouldHideBlockNews() {
         MainPage.openMainPage();
         MainPageElements.arrowOfNews.perform(click());
         MainPageElements.noNewsBlock.check(matches(not(isDisplayed())));
@@ -88,7 +88,7 @@ public class MainTests {
 
     @Test
     @DisplayName("Скрытие блока заявок")
-    public void HideBlockClaims() {
+    public void shouldHideBlockClaims() {
         MainPage.openMainPage();
         MainPageElements.arrowOfClaims.perform(click());
         MainPageElements.noClaimsBlock.check(matches(not(isDisplayed())));
@@ -96,7 +96,7 @@ public class MainTests {
 
     @Test
     @DisplayName("Переход к созданию заявки")
-    public void ClickCreateClaim() {
+    public void shouldClickCreateClaim() {
         MainPage.openMainPage().openCreationClaimPage();
         MainPageElements.viewCreateClaimPage.check(matches(isDisplayed()));
     }

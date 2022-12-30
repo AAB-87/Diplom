@@ -17,6 +17,7 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.matcher.ViewMatchers;
 
 import ru.iteco.fmhandroid.R;
+
 public class SwipeActions {
 
     public static boolean ViewAfterSwipe(ViewInteraction locator, int recycler, boolean finishSwipe) {

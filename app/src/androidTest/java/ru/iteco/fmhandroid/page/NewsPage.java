@@ -16,13 +16,17 @@ import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 import androidx.test.espresso.matcher.RootMatchers;
 
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.data.NewsData;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 public class NewsPage {
 
-    public static void openNewsPage() {
+    static NewsData.DataInNewsList data = new NewsData.DataInNewsList();
+
+    public static void openNewsPage() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
+        Thread.sleep(1000);
         onView(withText("Новости")).perform(click()); // кликаем по Новости
     }
 
@@ -43,7 +47,7 @@ public class NewsPage {
 
     public static void checkFirstDate() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_date_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText("15.12.2022"))); // проверяем что 1ая дата самая ранняя
+        onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText("17.12.2022"))); // проверяем что 1ая дата самая ранняя
     }
 
     public static void clickOpenFilter() {
@@ -78,7 +82,7 @@ public class NewsPage {
 
     public static void checkCurrentDate() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_date_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText("26.12.2022"))); // проверяем что первая дата самая поздняя
+        onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText(data.getToday()))); // проверяем что первая дата самая поздняя
     }
 
     public static void openControlPanel() throws InterruptedException {
@@ -136,7 +140,7 @@ public class NewsPage {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_category_text_auto_complete_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.news_item_category_text_auto_complete_text_view)).perform(click()); // кликаем по кнопке Категория
         closeSoftKeyboard(); // скрываем клавиатуру ввода
-        onView(withText("Профсоюз")).inRoot((RootMatchers.isPlatformPopup())).perform(click()); // выбираем категорию
+        onView(withText("Объявление")).inRoot((RootMatchers.isPlatformPopup())).perform(click()); // выбираем категорию
         closeSoftKeyboard(); // скрываем клавиатуру ввода
     }
 

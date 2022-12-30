@@ -46,14 +46,14 @@ public class OurMissionTests {
 
     @Test
     @DisplayName("Открытие страницы Наша миссия")
-    public void OpenOurMission() {
+    public void shouldOpenOurMission() {
         OurMissionPage.openOurMission();
         OurMissionPageElements.viewTitleMissionPage.check(matches(withText(text.getTitleText())));
     }
 
     @Test
     @DisplayName("Открытие 2ой цитаты")
-    public void OpenSecondQuote() {
+    public void shouldOpenSecondQuote() {
         OurMissionPage.openOurMission();
         OurMissionPageElements.openSecondQuote.perform(click());
         OurMissionPageElements.descriptionSecondQuote.check(matches(isDisplayed()));
@@ -61,7 +61,7 @@ public class OurMissionTests {
 
     @Test
     @DisplayName("Скролим и открываем 5ую цитату") // БАГ
-    public void ScrollAndViewFifthQuote() throws InterruptedException {
+    public void shouldScrollAndViewFifthQuote() throws InterruptedException {
         OurMissionPage.openOurMission().scrollAndOpenPageQuote();
         OurMissionPageElements.descriptionFifthQuote.check(matches(isDisplayed()));
     }

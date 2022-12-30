@@ -23,9 +23,6 @@ public class ClaimsPageElements {
     // поля заявки
     public static ViewInteraction claimsAuthor = onView(withId(R.id.executor_name_label_text_view)); // автор заявки
     public static ViewInteraction claimsStatus = onView(withId(R.id.status_label_text_view)); // статус заявки
-    public static ViewInteraction statusField = onView(withId(R.id.status_processing_image_button)); // поле со статусом заявки
-    public static ViewInteraction titleClaims = onView(withId(R.id.title_text_view)); // заголовок открытой заявки
-    public static ViewInteraction backButton = onView(withId(R.id.close_image_button)); // кнопка выхода из заявки
     public static ViewInteraction cancelButton = onView(withId(R.id.cancel_button)); // кнопка Отменить
 
     // сообщения
@@ -41,8 +38,6 @@ public class ClaimsPageElements {
     public static ViewInteraction saveButton = onView(withId(R.id.save_button)); // кнопка Сохранить
     public static ViewInteraction editClaimsButton = onView(withId(R.id.edit_processing_image_button)); // кнопка редактирования заявки
     public static ViewInteraction openSecondClaims = onView(withIndex(withId(R.id.plan_date_material_text_view), 1)); // кнопка открытия 2ой заявкиой
-    public static ViewInteraction firstComment = onView(withText("Отредактированный!")); // текст комментария
-    public static ViewInteraction claimsForChange = onView(withText("Для смены статуса")); // заявка для смены статуса
-    public static ViewInteraction claimList = onView(withId(R.id.claim_list_recycler_view)); // страница заявок
+    public static ViewInteraction firstComment = onView(withText("Отредактированный")); // текст комментария
 
 }

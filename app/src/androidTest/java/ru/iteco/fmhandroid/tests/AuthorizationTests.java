@@ -39,84 +39,84 @@ public class AuthorizationTests {
 
     @Test
     @DisplayName("Авторизация с валидными данными")
-    public void logInWithValidData() {
+    public void shouldLogInWithValidData() throws InterruptedException {
         AuthorizationPage.enterValidLoginAndPassword(data);
         MainPageElements.mainPage.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Авторизация с НЕвалидными данными")
-    public void logInWithInValidData() {
+    public void shouldLogInWithInValidData() {
         AuthorizationPage.enterInvalidLoginAndPassword(data);
         AuthorizationPageElements.checkTextInvalidUsernameOrPassword(activityTestRule);
     }
 
     @Test
     @DisplayName("Вход с НЕвалидными логином и валидным паролем")
-    public void logInWithInValidLoginAndValidPassword() {
+    public void shouldLogInWithInValidLoginAndValidPassword() {
         AuthorizationPage.enterInvalidLoginAndValidPassword(data);
         AuthorizationPageElements.checkTextInvalidUsernameOrPassword(activityTestRule);
     }
 
     @Test
     @DisplayName("Вход с валидным логином и НЕвалидным паролем")
-    public void logInWithValidLoginAndInvalidPassword() {
+    public void shouldLogInWithValidLoginAndInvalidPassword() {
         AuthorizationPage.enterValidLoginAndInvalidPassword(data);
         AuthorizationPageElements.checkTextInvalidUsernameOrPassword(activityTestRule);
     }
 
     @Test
     @DisplayName("Вход без логина и пароля")
-    public void logInWithEmptyFields() {
+    public void shouldLogInWithEmptyFields() {
         AuthorizationPage.enterWithEmptyFields();
         AuthorizationPageElements.checkTextLoginAndPasswordCannotBeEmpty(activityTestRule);
     }
 
     @Test
     @DisplayName("Вход с валидным логином и пустым паролем")
-    public void logInWithValidLoginAndEmptyPassword() {
+    public void shouldLogInWithValidLoginAndEmptyPassword() {
         AuthorizationPage.enterValidLoginAndEmptyPassword(data);
         AuthorizationPageElements.checkTextLoginAndPasswordCannotBeEmpty(activityTestRule);
     }
 
     @Test
     @DisplayName("Вход с пустым логином и валидным паролем")
-    public void logInWithEmptyLoginAndValidPassword() {
+    public void shouldLogInWithEmptyLoginAndValidPassword() {
         AuthorizationPage.enterEmptyLoginAndValidPassword(data);
         AuthorizationPageElements.checkTextLoginAndPasswordCannotBeEmpty(activityTestRule);
     }
 
     @Test
     @DisplayName("Ввод НЕвалидного логина в 50 символов") // БАГ
-    public void enterInvalidLoginIn50Characters() {
+    public void shouldEnterInvalidLoginIn50Characters() {
         AuthorizationPage.enterInvalidLoginIn50Characters(data);
         AuthorizationPageElements.checkTextCharacterLimitExceeded(activityTestRule);
     }
 
     @Test
     @DisplayName("Ввод НЕвалидного пароля в 50 символов") // БАГ
-    public void enterInvalidPasswordIn50Characters() {
+    public void shouldEnterInvalidPasswordIn50Characters() {
         AuthorizationPage.enterInvalidPasswordIn50Characters(data);
         AuthorizationPageElements.checkTextCharacterLimitExceeded(activityTestRule);
     }
 
     @Test
     @DisplayName("Вход с НЕвалидными данными более 10 раз подряд") // БАГ
-    public void logInWithInValidDataMoreThan10TimesInARow() {
+    public void shouldLogInWithInValidDataMoreThan10TimesInARow() {
         AuthorizationPage.enterLoginWithInValidDataMoreThan10TimesInARow(data);
         AuthorizationPageElements.checkTextTheUsersAccountIsBlocked(activityTestRule);
     }
 
     @Test
     @DisplayName("Вход с логином в верхнем регистре и валидным паролем")
-    public void logInWithLoginInUppercaseAndValidPassword() {
+    public void shouldLogInWithLoginInUppercaseAndValidPassword() {
         AuthorizationPage.enterLoginInUppercaseAndValidPassword(data);
         AuthorizationPageElements.checkTextInvalidUsernameOrPassword(activityTestRule);
     }
 
     @Test
     @DisplayName("Вход с валидными данными в верхнем регистре")
-    public void logInValidDataInUppercase() {
+    public void shouldLogInValidDataInUppercase() {
         AuthorizationPage.enterValidDataInUppercase(data);
         AuthorizationPageElements.checkTextInvalidUsernameOrPassword(activityTestRule);
     }

@@ -15,9 +15,12 @@ import static ru.iteco.fmhandroid.utils.SwipeActions.ViewAfterSwipe;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.data.ClaimsData;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 public class ClaimsPage {
+
+    static ClaimsData.FieldsForClaims fields = new ClaimsData.FieldsForClaims();
 
     public static void openClaimsPage() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
@@ -75,7 +78,7 @@ public class ClaimsPage {
     public static void editComment() throws InterruptedException {
         onView(withIndex(withId(R.id.edit_comment_image_button), 0)).perform(click()); // с помощью утилиты находим кнопку редактирования для 1го комментария в списке и кликаем по ней
         Thread.sleep(5000);
-        onView(allOf(withText("Отредактированный"))).perform(replaceText("Отредактированный!")); // редактируем комментарий
+        onView(allOf(withText("Отредактированный текст"))).perform(replaceText("Отредактированный")); // редактируем комментарий
         onView(withId(R.id.save_button)).check(matches(isDisplayed())); // убеждаемся что кнопка Сохранить отображается
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
     }
@@ -83,14 +86,15 @@ public class ClaimsPage {
     public static void changeStatus() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_processing_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.status_processing_image_button)).perform(click()); // кликаем по кнопке смены статуса
-        onView(withId(R.id.item_filter_in_progress)).perform(click()); // меняем статус на В работу
-        onView(withId(R.id.item_filter_open)).perform(click()); // убираем статус Открыта
-        onView(withId(R.id.claim_list_filter_ok_material_button)).perform(click()); // кликаем по кнопке ОК
+        Thread.sleep(3000);
+        onView(allOf(withText("В работу"))).perform(click()); // меняем статус на В работу
+        Thread.sleep(3000);
     }
 
     public static void waitingButtonToAppear() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(android.R.id.button1), 10000)); // ожидаем появление нужного элемента
         onView(withId(android.R.id.button1)).perform(click());; // кликаем по кнопке OK
     }
+
 
 }
