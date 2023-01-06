@@ -56,12 +56,12 @@ public class ClaimsTests {
     public void isAuthorizationPage() throws InterruptedException {
         AuthorizationPage.start();
         StartApp.logInWithValidData(); // если окно отображается, входим в приложение
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
     @Test
     @DisplayName("Открытие страницы заявки")
-    public void shouldOpenClaimsPage() {
+    public void shouldOpenClaimsPage() throws InterruptedException {
         claims.openClaimsPage();
         element.claimsPage.check(matches(isDisplayed()));
     }
@@ -70,9 +70,7 @@ public class ClaimsTests {
     @DisplayName("Просмотр первой заявки")
     public void shouldViewFirstClaims() throws InterruptedException {
         claims.openClaimsPage();
-        Thread.sleep(2000);
         element.firstClaims.perform(click());
-        Thread.sleep(2000);
         element.claimsAuthor.check(matches(isDisplayed()));
     }
 
@@ -80,9 +78,7 @@ public class ClaimsTests {
     @DisplayName("Открытие фильтра заявкок")
     public void shouldOpenFilterClaims() throws InterruptedException {
         claims.openClaimsPage();
-        Thread.sleep(2000);
         element.filterButton.perform(click());
-        Thread.sleep(2000);
         element.filterPage.check(matches(isDisplayed()));
     }
 
@@ -90,14 +86,10 @@ public class ClaimsTests {
     @DisplayName("Фильтрация заявкок")
     public void shouldFilterClaims() throws InterruptedException {
         claims.openClaimsPage();
-        Thread.sleep(2000);
         element.filterButton.perform(click());
-        Thread.sleep(2000);
         element.checkBoxOpen.perform(click());
         element.okButton.perform(click());
-        Thread.sleep(2000);
         claims.expectationSecondClaims();
-        Thread.sleep(4000);
         element.claimsStatus.check(matches(withText(data.getAtWorkText())));
     }
 
@@ -105,13 +97,10 @@ public class ClaimsTests {
     @DisplayName("Фильтрация заявкок без выбора статуса")
     public void shouldFilterClaimsWithoutStatusSelection() throws InterruptedException {
         claims.openClaimsPage();
-        Thread.sleep(2000);
         element.filterButton.perform(click());
-        Thread.sleep(2000);
         element.checkBoxOpen.perform(click());
         element.checkBoxAtWork.perform(click());
         element.okButton.perform(click());
-        Thread.sleep(2000);
         element.messageNothing.check(matches(isDisplayed()));
     }
 
@@ -124,7 +113,7 @@ public class ClaimsTests {
 
     @Test
     @DisplayName("Создание заявки")
-    public void shouldCreateClaimsWithValidData() throws InterruptedException {
+    public void shouldCreateClaimsWithValidData() {
         String emptyTitle = "no";
         String title = "Убрать мусор1";
         String emptyExecutor = "no";
@@ -140,12 +129,9 @@ public class ClaimsTests {
 
         claims.openCreateClaims();
         FillInFieldsForCreateClaims.FillInFieldsClaims(emptyTitle, title, emptyExecutor, withExecutorChoice, chosenExecutor, executor, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description);
-        Thread.sleep(3000);
         element.saveButton.perform(click());
-        Thread.sleep(3000);
         element.filterButton.perform(click());
         element.checkBoxOpen.perform(click());
-        Thread.sleep(3000);
         element.okButton.perform(click());
         ViewAfterSwipe(onView(withText(fields.getTitle)), 2, true);
     }
@@ -155,15 +141,11 @@ public class ClaimsTests {
     public void shouldEditClaim() throws InterruptedException {
         claims.openClaimsPage();
         element.filterButton.perform(click());
-        Thread.sleep(3000);
         element.checkBoxAtWork.perform(click());
-        Thread.sleep(1000);
         element.okButton.perform(click());
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         element.openSecondClaims.perform(click());
-        Thread.sleep(3000);
         ViewAfterSwipe(onView(withText("7")), 4, true);
-        Thread.sleep(3000);
         element.editClaimsButton.perform(click());
         claims.editAndCheckClaimsDate();
     }
@@ -175,37 +157,31 @@ public class ClaimsTests {
         claims.openClaimsPage();
         claims.openFirstClaims();
         claims.addComment();
-        Thread.sleep(5000);
         claims.checkAddComment();
     }
 
     @Test
     @DisplayName("Редактирование комменария")
-    // перед запуском поменяй комментарий в 3х местах
+    // перед запуском поменяй комментарий в 2х местах
     public void shouldEditComment() throws InterruptedException {
         claims.openClaimsPage();
         claims.openFirstClaims();
-        Thread.sleep(2000);
         claims.editComment();
-        Thread.sleep(10000);
         element.firstComment.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Смена статуса заявки")
-    // перед запуском необходимо убедиться что в первой заявке есть хотябы 2 комментария
+    // перед запуском необходимо убедиться что в первой заявке (после фильтрации) есть минимум 2 комментария
     public void shouldChangeStatusClaim() throws InterruptedException {
         claims.openClaimsPage();
         element.filterButton.perform(click());
         element.checkBoxAtWork.perform(click());
-        Thread.sleep(3000);
         element.okButton.perform(click());
-        Thread.sleep(3000);
         claims.openFirstClaims();
         ViewAfterSwipe(onView(withText("Для смены статуса")), 4, true);
         claims.changeStatus();
         onView(withId(R.id.claim_comments_list_recycler_view)).perform(swipeDown());
-        Thread.sleep(10000);
         element.claimsStatus.check(matches(withText(data.getAtWorkText())));
     }
 
@@ -214,7 +190,6 @@ public class ClaimsTests {
     public void shouldCreateClaimsWithEmptyData() throws InterruptedException {
         claims.openCreateClaims();
         element.saveButton.perform(click());
-        Thread.sleep(3000);
         onView(withText(message.getEmptyFieldsText()))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));

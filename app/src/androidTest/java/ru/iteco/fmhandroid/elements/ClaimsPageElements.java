@@ -38,6 +38,6 @@ public class ClaimsPageElements {
     public static ViewInteraction saveButton = onView(withId(R.id.save_button)); // кнопка Сохранить
     public static ViewInteraction editClaimsButton = onView(withId(R.id.edit_processing_image_button)); // кнопка редактирования заявки
     public static ViewInteraction openSecondClaims = onView(withIndex(withId(R.id.plan_date_material_text_view), 1)); // кнопка открытия 2ой заявкиой
-    public static ViewInteraction firstComment = onView(withText("Отредактированный")); // текст комментария
+    public static ViewInteraction firstComment = onView(withText("Отредактированный5")); // текст комментария
 
 }

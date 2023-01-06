@@ -5,6 +5,7 @@ import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
@@ -40,6 +41,7 @@ public class SwipeActions {
                     onView(allOf(withId(R.id.our_mission_item_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                 }
                 if (recycler == 4) {
+                    onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_comments_list_recycler_view), 5000)); // находим поле описания
                     onView(allOf(withId(R.id.claim_comments_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                 }
             } catch (PerformException e) {
@@ -63,6 +65,7 @@ public class SwipeActions {
                         onView(allOf(withId(R.id.our_mission_item_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                     }
                     if (recycler == 4) {
+                        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_comments_list_recycler_view), 5000)); // находим поле описания
                         onView(allOf(withId(R.id.claim_comments_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                     }
                 } catch (PerformException e) {

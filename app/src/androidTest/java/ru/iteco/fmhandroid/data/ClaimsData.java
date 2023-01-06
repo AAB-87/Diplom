@@ -6,7 +6,6 @@ public class ClaimsData {
     }
 
     public static class StatusData {
-        public String getAtWorkText;
 
         private String atWorkText = "В работе";
 
@@ -25,18 +24,11 @@ public class ClaimsData {
 
     public static class FieldsForClaims {
         public String getTitle;
-        public String getDescriptionEdited;
-        public String getChangeStatusClaim;
 
         private String title = "Убрать мусор1";
-        private String descriptionEdited = "Отредактированный";
-        private String changeStatusClaim = "Для смены статуса";
 
-
-        public FieldsForClaims(String title, String descriptionEdited, String changeStatusClaim) {
+        public FieldsForClaims(String title) {
             this.title = title;
-            this.descriptionEdited = descriptionEdited;
-            this.changeStatusClaim = changeStatusClaim;
         }
 
         public FieldsForClaims() {
