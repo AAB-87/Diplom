@@ -36,7 +36,7 @@ public class AboutAppTests {
     public void isAuthorizationPage() throws InterruptedException {
         AuthorizationPage.start();
         StartApp.logInWithValidData(); // если окно отображается, входим в приложение
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
     @Test

@@ -24,11 +24,10 @@ public class OurMissionPage {
         return new OurMissionPage();
     }
 
-    public static OurMissionPage scrollAndOpenPageQuote() throws InterruptedException {
+    public static OurMissionPage scrollAndOpenPageQuote() {
         onView(ViewMatchers.withId(R.id.our_mission_item_list_recycler_view)).perform(RecyclerViewActions.scrollTo(hasDescendant(withText(text.getTitleEighthQuote())))); // скролим вниз до последней цитаты
         onView(isRoot()).perform(ViewActions.waitElement((withText(text.getTitleFifthQuote())), 10000)); // ожидаем появление нужного элемента
         onView(withText(text.getTitleFifthQuote())).perform(click()); // кликаем цитате
-        Thread.sleep(5000);
         return new OurMissionPage();
     }
 

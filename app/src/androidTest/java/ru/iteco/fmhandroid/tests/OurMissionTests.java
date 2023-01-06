@@ -41,7 +41,7 @@ public class OurMissionTests {
     public void isAuthorizationPage() throws InterruptedException {
         AuthorizationPage.start();
         StartApp.logInWithValidData(); // если окно отображается, входим в приложение
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class OurMissionTests {
 
     @Test
     @DisplayName("Скролим и открываем 5ую цитату") // БАГ
-    public void shouldScrollAndViewFifthQuote() throws InterruptedException {
+    public void shouldScrollAndViewFifthQuote() {
         OurMissionPage.openOurMission().scrollAndOpenPageQuote();
         OurMissionPageElements.descriptionFifthQuote.check(matches(isDisplayed()));
     }
