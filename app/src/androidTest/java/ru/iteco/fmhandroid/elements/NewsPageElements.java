@@ -33,7 +33,7 @@ public class NewsPageElements {
     public static ViewInteraction statusSecondNews = onView(withIndex(withId(R.id.news_item_published_text_view), 1)); // с помощью утилиты находим статус в 2ой новости
     public static ViewInteraction editFirstNews1 = onView(withIndex(withId(R.id.edit_news_item_image_view), 0)); // кнопка редактирования 1ой новости
     public static ViewInteraction titleFirstNews1 = onView(withIndex(withId(R.id.news_item_title_text_view), 0)); // с помощью утилиты находим 1ую новость
-    public static ViewInteraction titleSecondNews = onView(withIndex(withId(R.id.news_item_title_text_view), 2)); // с помощью утилиты находим 2ую новость
+    public static ViewInteraction titleSecondNews = onView(withIndex(withId(R.id.news_item_title_text_view), 1)); // с помощью утилиты находим 2ую новость
     public static ViewInteraction titleFirstNews4 = onView(withIndex(withId(R.id.news_item_title_text_view), 0)); // с помощью утилиты находим 1ую новость
     public static ViewInteraction descriptionFirstNews1 = onView(withIndex(withId(R.id.news_item_description_text_view), 0)); // с помощью утилиты находим описание в 1ой новости в списке
     public static ViewInteraction descriptionFirstNews2 = onView(withIndex(withId(R.id.news_item_description_text_view), 0)); // с помощью утилиты находим описание в 1ой новости в списке

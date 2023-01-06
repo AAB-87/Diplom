@@ -7,6 +7,8 @@ import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -21,6 +23,7 @@ import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
+import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.data.NewsData;
 import ru.iteco.fmhandroid.elements.NewsPageElements;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
@@ -28,6 +31,7 @@ import ru.iteco.fmhandroid.page.NewsPage;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.FillInFieldsForCreateNews;
 import ru.iteco.fmhandroid.utils.StartApp;
+import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AllureAndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
@@ -50,67 +54,62 @@ public class NewsTests {
     public void isAuthorizationPage() throws InterruptedException {
         AuthorizationPage.start();
         StartApp.logInWithValidData(); // если окно отображается, входим в приложение
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
     @Test
     @DisplayName("Открытие страницы новостей")
-    public void shouldOpenNewsPage() throws InterruptedException {
+    public void shouldOpenNewsPage() {
         newsPage.openNewsPage();
-        Thread.sleep(3000);
         newsPageElements.listNews.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Просмотр описания первой новости")
-    public void shouldViewDescriptionsFirstNews() throws InterruptedException {
+    public void shouldViewDescriptionsFirstNews() {
         newsPage.openNewsPage();
         newsPage.openFirstNews();
-        Thread.sleep(5000);
         newsPageElements.descriptionFirstNews1.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Просмотр описания шестой новости")
-    public void shouldViewDescriptionsSixthNews() throws InterruptedException {
+    public void shouldViewDescriptionsSixthNews() {
         newsPage.openNewsPage();
         newsPage.openSixthNews();
-        Thread.sleep(3000);
         newsPageElements.descriptionSixthNews.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Сортировка новостей") // БАГ
     // перед запуском проверь что ожидаемая дата самая ранняя в списке новостей
-    public void shouldSortNews() throws InterruptedException {
+    public void shouldSortNews() {
         newsPage.openNewsPage();
         newsPage.clickSortNews();
-        Thread.sleep(3000);
         newsPage.checkFirstDate();
     }
 
     @Test
     @DisplayName("Открытие фильтра новостей")
-    public void shouldOpenFilterNewsScreen() throws InterruptedException {
+    public void shouldOpenFilterNewsScreen() {
         newsPage.openNewsPage();
         newsPage.clickOpenFilter();
     }
 
     @Test
     @DisplayName("Фильтрация новостей по категории")
-    public void shouldFilterNewsByCategory() throws InterruptedException {
+    public void shouldFilterNewsByCategory() {
         newsPage.openNewsPage();
         newsPage.clickOpenFilter();
         newsPage.selectCategory();
         newsPageElements.filterButton.perform(click());
         newsPageElements.titleFirstNews.perform(click());
-        Thread.sleep(3000);
         newsPageElements.descriptionFirstNews.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Фильтрация новостей по несуществующей категории") // БАГ
-    public void shouldFilterNewsByNonExistentCategory() throws InterruptedException {
+    public void shouldFilterNewsByNonExistentCategory() {
         newsPage.openNewsPage();
         newsPage.clickOpenFilter();
         newsPage.selectNonexistentCategory();
@@ -121,19 +120,18 @@ public class NewsTests {
 
     @Test
     @DisplayName("Отмена фильтрации")
-    public void shouldCancelFilter() throws InterruptedException {
+    public void shouldCancelFilter() {
         newsPage.openNewsPage();
         newsPage.clickOpenFilter();
         newsPage.selectCategory();
         newsPageElements.clickCancelFilter.perform(click());
-        Thread.sleep(3000);
         newsPageElements.listNews.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Фильтрация новостей по дате")
     // перед запуском поменять дату в последней строке на самую позднюю в списске новостей
-    public void shouldFilterNewsByDate() throws InterruptedException {
+    public void shouldFilterNewsByDate() {
         newsPage.openNewsPage();
         newsPage.clickOpenFilter();
         newsPage.selectDate();
@@ -143,45 +141,41 @@ public class NewsTests {
 
     @Test
     @DisplayName("Открытие страницы ПУ")
-    public void shouldOpenControlPanelScreen() throws InterruptedException {
+    public void shouldOpenControlPanelScreen() {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
-        Thread.sleep(3000);
         newsPageElements.textControlPanel.check(matches(isDisplayed()));
     }
 
     @Test
     @DisplayName("Просмотр описания первой новости в ПУ")
-    public void shouldViewDescriptionFirstNewsInControlPanel() throws InterruptedException {
+    public void shouldViewDescriptionFirstNewsInControlPanel() {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
         newsPageElements.titleFirstNews1.perform(click());
-        Thread.sleep(5000);
         newsPageElements.descriptionFirstNews3.check(matches(isDisplayed()));
     }
 
     @Test
-    @DisplayName("Сортировка новостей в ПУ")
+    @DisplayName("Сортировка новостей в ПУ") // БАГ
     // перед запуском проверь что ожидаемая дата самая ранняя в списке новостей
-    public void shouldSortNewsInControlPanel() throws InterruptedException {
+    public void shouldSortNewsInControlPanel() {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
         newsPageElements.textControlPanel.check(matches(isDisplayed()));
         newsPage.clickSortNews();
-        Thread.sleep(3000);
         newsPage.checkFirstDateInControlPanel();
     }
 
     @Test
     @DisplayName("Фильтрация новостей по статусу в ПУ")
-    public void shouldFilterNewsInControlPanelByStatus() throws InterruptedException {
+    public void shouldFilterNewsInControlPanelByStatus() {
         // перед запуском убедись что статус 1ой новости Активна
         newsPage.openNewsPage();
         newsPage.openControlPanel();
         newsPage.clickOpenFilter();
         newsPageElements.checkboxActive.perform(click());
         newsPageElements.filterButton.perform(click());
-        Thread.sleep(3000);
         newsPageElements.statusFirstNews.check(matches(withText(data.getStatusNotActive())));
     }
 
@@ -207,13 +201,13 @@ public class NewsTests {
         newsPage.clickOpenFilter();
         newsPage.selectCategory();
         newsPageElements.filterButton.perform(click());
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         newsPageElements.titleSecondNews.check(matches(withText(containsString(data.getTitleTextSalary()))));
     }
 
     @Test
     @DisplayName("Создание новости")
-//    перед запуском необходимо убедиться что после фильтрации по категории, в списке новостей вторая новость с заголовком Зарплата
+//    перед запуском необходимо убедиться что после фильтрации по категории, в списке новостей вторая новость БУДЕТ с заголовком Зарплата
     public void shouldCreateNews() throws InterruptedException {
         String emptyCategory = "no";
         String withCategoryChoice = "yes";
@@ -232,61 +226,52 @@ public class NewsTests {
         newsPageElements.createNewsButton.perform(click());
         FillInFieldsForCreateNews.FillInFieldsNews(emptyCategory, withCategoryChoice, chosenCategory, category, title, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description); // заполняем поля окна создания новости
         newsPageElements.saveNewsButton.perform(click());
-        Thread.sleep(5000);
         newsPage.clickOpenFilter();
         newsPage.selectCategory();
         newsPageElements.filterButton.perform(click());
-        Thread.sleep(3000);
         newsPageElements.titleSecondNews.check(matches(withText(containsString(data.getTitleTextSalary()))));
     }
 
     @Test
     @DisplayName("Удаление новости")
-    public void shouldDeleteNews() throws InterruptedException {
+    public void shouldDeleteNews() {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
         newsPageElements.deleteFirstNewsButton.perform(click());
-        Thread.sleep(3000);
         newsPageElements.selectionConfirmationButton.perform(click());
-        Thread.sleep(3000);
         newsPageElements.textSalary.check(doesNotExist());
     }
 
     @Test
     @DisplayName("Редактирование описания новости")
-    public void shouldEditNewsDescription() throws InterruptedException {
+    public void shouldEditNewsDescription() {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
         newsPageElements.editFirstNews.perform(click());
         newsPageElements.descriptionField.perform(replaceText(data.getEditText()));
         newsPageElements.saveNewsButton.perform(click());
-        Thread.sleep(3000);
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.view_news_item_image_view), 10000)); // ожидаем появление нужного элемента
         newsPageElements.viewNewsButton.perform(click());
-        Thread.sleep(3000);
         newsPageElements.descriptionFirstNews2.check(matches(withText(data.getEditText())));
     }
 
     @Test
     @DisplayName("Изменение категории новости")
     // тест работатет, но проверить изменения можно только по иконки. Реализацию проверки смены иконки не нашёл.
-    public void shouldChangNewsCategory() throws InterruptedException {
+    public void shouldChangNewsCategory() {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
-        Thread.sleep(3000);
         newsPage.editCategory();
         newsPageElements.saveNewsButton.perform(click());
-        Thread.sleep(3000);
     }
 
     @Test
     @DisplayName("Изменение категории новости на несуществующую в списке")
-    public void shouldChangNewsCategoryToNonExistentOneInList() throws InterruptedException {
+    public void shouldChangNewsCategoryToNonExistentOneInList() {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
-        Thread.sleep(3000);
         newsPage.editCategoryToNonexistent();
         newsPageElements.saveNewsButton.perform(click());
-        Thread.sleep(1000);
         onView(withText(data.getSaveFailedMessages()))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
@@ -297,10 +282,9 @@ public class NewsTests {
     public void shouldEditNewsStatus() throws InterruptedException {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
-        Thread.sleep(3000);
         newsPage.changeSwitcher();
         newsPageElements.saveNewsButton.perform(click());
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         newsPageElements.statusSecondNews.check(matches(withText(data.getStatusNotActive())));
     }
 
@@ -313,12 +297,11 @@ public class NewsTests {
         newsPage.clickOpenFilter();
         newsPage.changeCategory();
         newsPageElements.filterButton.perform(click());
-        Thread.sleep(3000);
         newsPageElements.titleFirstNews4.check(matches(withText(data.getTitleAdvertisement())));
         newsPageElements.editFirstNews1.perform(click());
         newsPage.changeFirstDate();
         newsPageElements.saveNewsButton.perform(click());
-        Thread.sleep(4000);
+        Thread.sleep(1000);
         newsPageElements.publicationDate1News.check(matches(withText(containsString(data.getToday()))));
     }
 

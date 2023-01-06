@@ -23,10 +23,9 @@ public class NewsPage {
 
     static NewsData.DataInNewsList data = new NewsData.DataInNewsList();
 
-    public static void openNewsPage() throws InterruptedException {
+    public static void openNewsPage() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
-        Thread.sleep(1000);
         onView(withText("Новости")).perform(click()); // кликаем по Новости
     }
 
@@ -85,10 +84,9 @@ public class NewsPage {
         onView(withIndex(withId(R.id.news_item_date_text_view), 0)).check(matches(withText(data.getToday()))); // проверяем что первая дата самая поздняя
     }
 
-    public static void openControlPanel() throws InterruptedException {
+    public static void openControlPanel() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.edit_news_material_button)).perform(click()); // кликаем по кнопке Редактирование
-        Thread.sleep(3000);
     }
 
     public static void checkFirstDateInControlPanel() {
@@ -104,22 +102,20 @@ public class NewsPage {
         onView(withText("ОК")).perform(click()); // кликаем по кнопке ОК
     }
 
-    public static void editCategory() throws InterruptedException {
+    public static void editCategory() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_item_image_view), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.edit_news_item_image_view), 0)).perform(click()); // кликаем по кнопке редактирования 1ой новости
         onView(withId(R.id.news_item_category_text_auto_complete_text_view)).perform(click()); // кликаем по полю Категория
         onView(allOf(withHint("Категория"))).perform(replaceText("Массаж")); // вводим новую категорию
         closeSoftKeyboard(); // скрываем клавиатуру ввода
-        Thread.sleep(5000);
     }
 
-    public static void editCategoryToNonexistent() throws InterruptedException {
+    public static void editCategoryToNonexistent() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_news_item_image_view), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.edit_news_item_image_view), 1)).perform(click()); // кликаем по кнопке редактирования 2ой новости
         onView(withId(R.id.news_item_category_text_auto_complete_text_view)).perform(click()); // кликаем по полю Категория
         onView(allOf(withHint("Категория"))).perform(replaceText("Другая")); // вводим новую категорию
         closeSoftKeyboard(); // скрываем клавиатуру ввода
-        Thread.sleep(5000);
     }
 
     public static void changeSwitcher() {
