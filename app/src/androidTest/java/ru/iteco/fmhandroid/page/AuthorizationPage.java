@@ -20,13 +20,12 @@ import ru.iteco.fmhandroid.utils.ViewActions;
 
 public class AuthorizationPage {
 
-    public static MainPage start() throws InterruptedException {
+    public static MainPage start() {
         try {
             onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем окно авторизации
         } catch (PerformException e) { // если окно не отображается (пользователь авторизирован), ловит ошибку кладёт её в ячеёку e (e сокращённо Exception) и программа не "умирает"
             StartApp.logOutTheApplication(); // осуществляем выход из приложения
         }
-        Thread.sleep(7000);
         return new MainPage();
     }
 
@@ -106,13 +105,13 @@ public class AuthorizationPage {
         return new MainPage();
     }
 
-    public static MainPage enterLoginWithInValidDataMoreThan10TimesInARow(AuthorizationData.AuthData data) {
+    public static MainPage enterLoginWithInValidDataMoreThan5TimesInARow(AuthorizationData.AuthData data) {
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
         onView(allOf(withHint("Логин"))).perform(replaceText(data.getInvalidLogin())); // вводим логин
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Пароль")), 10000)); // ожидаем появление нужного элемента
         onView(allOf(withHint("Пароль"))).perform(replaceText(data.getInvalidPassword())); // вводим пароль
         closeSoftKeyboard(); // скрываем клавиатуру ввода
-        for (int i = 0; i < 10; i++) { // пока i меньше 10
+        for (int i = 0; i < 5; i++) { // пока i меньше 10
             onView(withId(R.id.enter_button)).perform(click()); // кликаем по кнопке входа
         }
         return new MainPage();

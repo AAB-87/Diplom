@@ -33,7 +33,7 @@ public class AuthorizationTests {
     private static AuthorizationData.AuthData data = new AuthorizationData.AuthData();
 
     @Before
-    public void isAuthorizationPage() throws InterruptedException {
+    public void isAuthorizationPage() {
         AuthorizationPage.start();
     }
 
@@ -101,13 +101,6 @@ public class AuthorizationTests {
     }
 
     @Test
-    @DisplayName("Вход с НЕвалидными данными более 10 раз подряд") // БАГ
-    public void shouldLogInWithInValidDataMoreThan10TimesInARow() {
-        AuthorizationPage.enterLoginWithInValidDataMoreThan10TimesInARow(data);
-        AuthorizationPageElements.checkTextTheUsersAccountIsBlocked(activityTestRule);
-    }
-
-    @Test
     @DisplayName("Вход с логином в верхнем регистре и валидным паролем")
     public void shouldLogInWithLoginInUppercaseAndValidPassword() {
         AuthorizationPage.enterLoginInUppercaseAndValidPassword(data);
@@ -119,6 +112,14 @@ public class AuthorizationTests {
     public void shouldLogInValidDataInUppercase() {
         AuthorizationPage.enterValidDataInUppercase(data);
         AuthorizationPageElements.checkTextInvalidUsernameOrPassword(activityTestRule);
+    }
+
+    @Test
+    @DisplayName("Вход с НЕвалидными данными более 5и раз подряд") // БАГ
+    public void shouldLogInWithInValidDataMoreThan5TimesInARow() throws InterruptedException {
+        AuthorizationPage.enterLoginWithInValidDataMoreThan5TimesInARow(data);
+        Thread.sleep(3000);
+        AuthorizationPageElements.checkTextTheUsersAccountIsBlocked(activityTestRule);
     }
 
 }

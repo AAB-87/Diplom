@@ -18,7 +18,7 @@ import ru.iteco.fmhandroid.R;
 public class StartApp {
 
     @DisplayName("Авторизация с валидными данными")
-    public static void logInWithValidData() { // падает если пользователь авторизирован
+    public static void logInWithValidData() {
         String validLogin = "login2";
         String validPassword = "password2";
         onView(isRoot()).perform(ViewActions.waitElement(allOf(withHint("Логин")), 10000)); // ожидаем появление нужного элемента
@@ -31,7 +31,7 @@ public class StartApp {
     }
 
     @DisplayName("Выход из аккаунта")
-    public static void logOutTheApplication() { // работает если пользователь не авторизован
+    public static void logOutTheApplication() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.authorization_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.authorization_image_button)).perform(click()); // кликаем по иконке для выхода
         onView(withText("Выйти")).check(matches(isDisplayed())); // проверяем что всплывает кнопка Выйти
