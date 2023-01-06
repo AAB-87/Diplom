@@ -3,10 +3,7 @@ package ru.iteco.fmhandroid.tests;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
-import androidx.test.rule.ActivityTestRule;
-
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,11 +16,7 @@ import ru.iteco.fmhandroid.page.AuthorizationPage;
 
 @RunWith(AllureAndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class AuthorizationTests {
-
-    @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
-    public ActivityTestRule<ru.iteco.fmhandroid.ui.AppActivity> activityTestRule =
-            new ActivityTestRule<>(ru.iteco.fmhandroid.ui.AppActivity.class);
+public class AuthorizationTests extends RunRuleTest {
 
     // Общие правила
     // ViewMatcher - находим, определяем элемент в иерархии

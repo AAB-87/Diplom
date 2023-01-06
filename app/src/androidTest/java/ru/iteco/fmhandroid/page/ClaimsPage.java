@@ -57,7 +57,7 @@ public class ClaimsPage {
         Thread.sleep(5000);
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_comment_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_comment_image_button)).perform(click()); // кликаем по кнопке добавления комментария
-        onView(allOf(withHint("Комментарий"))).perform(replaceText("222")); // вписываем комментарий
+        onView(allOf(withHint("Комментарий"))).perform(replaceText("333")); // вписываем комментарий
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(5000);
     }
@@ -65,7 +65,7 @@ public class ClaimsPage {
     public static void checkAddComment() {
         ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
         onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
-        onView(withText("222")).check(matches(isDisplayed())); // проверяем что комментарий отображается
+        onView(withText("333")).check(matches(isDisplayed())); // проверяем что комментарий отображается
     }
 
     public static void openFirstClaims() throws InterruptedException {
@@ -78,7 +78,7 @@ public class ClaimsPage {
     public static void editComment() throws InterruptedException {
         onView(withIndex(withId(R.id.edit_comment_image_button), 0)).perform(click()); // с помощью утилиты находим кнопку редактирования для 1го комментария в списке и кликаем по ней
         Thread.sleep(5000);
-        onView(allOf(withText("Отредактированный4"))).perform(replaceText("Отредактированный5")); // редактируем комментарий
+        onView(allOf(withText("Отредактированный5"))).perform(replaceText("Отредактированный6")); // редактируем комментарий
         onView(withId(R.id.save_button)).check(matches(isDisplayed())); // убеждаемся что кнопка Сохранить отображается
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(3000);

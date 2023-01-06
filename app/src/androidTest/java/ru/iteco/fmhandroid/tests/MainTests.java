@@ -6,29 +6,21 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 import static org.hamcrest.Matchers.not;
 
-import androidx.test.rule.ActivityTestRule;
-
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ru.iteco.fmhandroid.elements.MainPageElements;
 import ru.iteco.fmhandroid.page.MainPage;
-import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.StartApp;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
 
 @RunWith(AllureAndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class MainTests {
-
-    @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
-    public ActivityTestRule<AppActivity> activityTestRule =
-            new ActivityTestRule<>(ru.iteco.fmhandroid.ui.AppActivity.class);
+public class MainTests extends RunRuleTest {
 
     // Общие правила
     // ViewMatcher - находим, определяем элемент в иерархии

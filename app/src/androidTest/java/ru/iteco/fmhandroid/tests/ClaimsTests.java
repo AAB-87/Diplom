@@ -13,13 +13,10 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static ru.iteco.fmhandroid.utils.SwipeActions.ViewAfterSwipe;
 
-import androidx.test.rule.ActivityTestRule;
-
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,17 +25,12 @@ import ru.iteco.fmhandroid.data.ClaimsData;
 import ru.iteco.fmhandroid.elements.ClaimsPageElements;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
 import ru.iteco.fmhandroid.page.ClaimsPage;
-import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.FillInFieldsForCreateClaims;
 import ru.iteco.fmhandroid.utils.StartApp;
 
 @RunWith(AllureAndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class ClaimsTests {
-
-    @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
-    public ActivityTestRule<AppActivity> activityTestRule =
-            new ActivityTestRule<>(ru.iteco.fmhandroid.ui.AppActivity.class);
+public class ClaimsTests extends RunRuleTest {
 
     // Общие правила
     // ViewMatcher - находим, определяем элемент в иерархии

@@ -14,10 +14,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
-import androidx.test.rule.ActivityTestRule;
-
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,18 +25,13 @@ import ru.iteco.fmhandroid.data.NewsData;
 import ru.iteco.fmhandroid.elements.NewsPageElements;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
 import ru.iteco.fmhandroid.page.NewsPage;
-import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.FillInFieldsForCreateNews;
 import ru.iteco.fmhandroid.utils.StartApp;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 @RunWith(AllureAndroidJUnit4.class) // чтобы класс запускался как набор тестов
 
-public class NewsTests {
-
-    @Rule // указываем какое приложение будем запускать. Cм activity в AndroidManifest.xml
-    public ActivityTestRule<AppActivity> activityTestRule =
-            new ActivityTestRule<>(AppActivity.class);
+public class NewsTests extends RunRuleTest {
 
     static NewsData.DataInNewsList data = new NewsData.DataInNewsList();
     static NewsPageElements newsPageElements = new NewsPageElements();
