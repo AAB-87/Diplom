@@ -1,8 +1,5 @@
 package ru.iteco.fmhandroid.tests;
 
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 
@@ -10,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import ru.iteco.fmhandroid.elements.AboutAppPageElements;
 import ru.iteco.fmhandroid.page.AboutAppPage;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
 import ru.iteco.fmhandroid.utils.StartApp;
@@ -35,7 +31,7 @@ public class AboutAppTests extends RunRuleTest {
     @DisplayName("Открытие страницы О приложении")
     public void shouldOpenAboutAppPage() {
         AboutAppPage.openAboutApp();
-        AboutAppPageElements.viewVersion.check(matches(isDisplayed()));
+        AboutAppPage.checkOpenAboutAppPage();
     }
 
     @Test

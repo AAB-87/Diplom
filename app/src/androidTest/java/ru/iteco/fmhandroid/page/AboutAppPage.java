@@ -6,6 +6,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasData;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -18,6 +19,11 @@ import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 public class AboutAppPage {
+
+    public static AboutAppPage checkOpenAboutAppPage() {
+        onView(withId(R.id.about_version_title_text_view)).check(matches(isDisplayed())); // проверка что версия отображается
+        return new AboutAppPage();
+    }
 
     public static AboutAppPage openAboutApp() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента

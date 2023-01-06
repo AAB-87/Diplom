@@ -35,13 +35,14 @@ public class SwipeActions {
                     onView(allOf(withId(R.id.news_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                 }
                 if (recycler == 2) {
+                    onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 1000)); // ожидаем появление нужного элемента
                     onView(allOf(withId(R.id.claim_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                 }
                 if (recycler == 3) {
                     onView(allOf(withId(R.id.our_mission_item_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                 }
                 if (recycler == 4) {
-                    onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_comments_list_recycler_view), 5000)); // находим поле описания
+                    onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_comments_list_recycler_view), 1000)); // ожидаем появление нужного элемента
                     onView(allOf(withId(R.id.claim_comments_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                 }
             } catch (PerformException e) {
@@ -59,13 +60,14 @@ public class SwipeActions {
                         onView(allOf(withId(R.id.news_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                     }
                     if (recycler == 2) {
+                        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 1000)); // ожидаем появление нужного элемента
                         onView(allOf(withId(R.id.claim_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                     }
                     if (recycler == 3) {
                         onView(allOf(withId(R.id.our_mission_item_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                     }
                     if (recycler == 4) {
-                        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_comments_list_recycler_view), 5000)); // находим поле описания
+                        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_comments_list_recycler_view), 1000)); // ожидаем появление нужного элемента
                         onView(allOf(withId(R.id.claim_comments_list_recycler_view), isDisplayed())).perform(actionOnItemAtPosition(n, swipeUp()));
                     }
                 } catch (PerformException e) {

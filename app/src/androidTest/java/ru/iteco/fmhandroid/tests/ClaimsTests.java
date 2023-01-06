@@ -1,12 +1,9 @@
 package ru.iteco.fmhandroid.tests;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.Matchers.is;
@@ -20,9 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.data.ClaimsData;
-import ru.iteco.fmhandroid.elements.ClaimsPageElements;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
 import ru.iteco.fmhandroid.page.ClaimsPage;
 import ru.iteco.fmhandroid.utils.FillInFieldsForCreateClaims;
@@ -37,12 +32,9 @@ public class ClaimsTests extends RunRuleTest {
     // ViewActions - производим действие с элементом
     // ViewAssertions - проверяем состояние найденного элемента
 
-    static ClaimsPageElements element = new ClaimsPageElements();
     static ClaimsPage claims = new ClaimsPage();
-    static ClaimsData.StatusData data = new ClaimsData.StatusData();
     static ClaimsData.FieldsForClaims fields = new ClaimsData.FieldsForClaims();
     static ClaimsData.ErrorMessage message = new ClaimsData.ErrorMessage();
-
 
     @Before
     public void isAuthorizationPage() throws InterruptedException {
@@ -52,55 +44,54 @@ public class ClaimsTests extends RunRuleTest {
     }
 
     @Test
-    @DisplayName("Открытие страницы заявки")
+    @DisplayName("Открытие страницы заявок")
     public void shouldOpenClaimsPage() throws InterruptedException {
         claims.openClaimsPage();
-        element.claimsPage.check(matches(isDisplayed()));
+        claims.checkOpenClaimsPage();
     }
 
     @Test
     @DisplayName("Просмотр первой заявки")
     public void shouldViewFirstClaims() throws InterruptedException {
         claims.openClaimsPage();
-        element.firstClaims.perform(click());
-        element.claimsAuthor.check(matches(isDisplayed()));
+        claims.viewFirstClaims();
+        claims.checkAuthorClaims();
     }
 
     @Test
-    @DisplayName("Открытие фильтра заявкок")
+    @DisplayName("Открытие окна для фильтрации заявок")
     public void shouldOpenFilterClaims() throws InterruptedException {
         claims.openClaimsPage();
-        element.filterButton.perform(click());
-        element.filterPage.check(matches(isDisplayed()));
+        claims.clickFilterButton();
+        claims.checkFilterWindow();
     }
 
     @Test
-    @DisplayName("Фильтрация заявкок")
+    @DisplayName("Фильтрация заявок")
     public void shouldFilterClaims() throws InterruptedException {
         claims.openClaimsPage();
-        element.filterButton.perform(click());
-        element.checkBoxOpen.perform(click());
-        element.okButton.perform(click());
+        claims.clickFilterButton();
+        claims.clickOpenCheckbox();
+        claims.clickOkButton();
         claims.expectationSecondClaims();
-        element.claimsStatus.check(matches(withText(data.getAtWorkText())));
+        claims.checkByInProgressClaims();
     }
 
     @Test
     @DisplayName("Фильтрация заявкок без выбора статуса")
     public void shouldFilterClaimsWithoutStatusSelection() throws InterruptedException {
         claims.openClaimsPage();
-        element.filterButton.perform(click());
-        element.checkBoxOpen.perform(click());
-        element.checkBoxAtWork.perform(click());
-        element.okButton.perform(click());
-        element.messageNothing.check(matches(isDisplayed()));
+        claims.clickFilterButton();
+        claims.clickOpenCheckbox();
+        claims.filterByInProgressClaims();
+        claims.checkMessageNothing();
     }
 
     @Test
     @DisplayName("Открытие окна создания заявки")
     public void shouldOpenCreateClaimsScreen() {
         claims.openCreateClaims();
-        element.titleCreatePage.check(matches(isDisplayed()));
+        claims.viewTitleCreateText();
     }
 
     @Test
@@ -121,10 +112,10 @@ public class ClaimsTests extends RunRuleTest {
 
         claims.openCreateClaims();
         FillInFieldsForCreateClaims.FillInFieldsClaims(emptyTitle, title, emptyExecutor, withExecutorChoice, chosenExecutor, executor, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description);
-        element.saveButton.perform(click());
-        element.filterButton.perform(click());
-        element.checkBoxOpen.perform(click());
-        element.okButton.perform(click());
+        claims.clickSaveButton();
+        claims.clickFilterButton();
+        claims.clickOpenCheckbox();
+        claims.clickOkButton();
         ViewAfterSwipe(onView(withText(fields.getTitle)), 2, true);
     }
 
@@ -132,13 +123,12 @@ public class ClaimsTests extends RunRuleTest {
     @DisplayName("Редактирование заявки") // БАГ
     public void shouldEditClaim() throws InterruptedException {
         claims.openClaimsPage();
-        element.filterButton.perform(click());
-        element.checkBoxAtWork.perform(click());
-        element.okButton.perform(click());
+        claims.clickFilterButton();
+        claims.filterByInProgressClaims();
         Thread.sleep(1000);
-        element.openSecondClaims.perform(click());
+        claims.openSecondClaims();
         ViewAfterSwipe(onView(withText("7")), 4, true);
-        element.editClaimsButton.perform(click());
+        claims.editClaimsButton();
         claims.editAndCheckClaimsDate();
     }
 
@@ -159,7 +149,7 @@ public class ClaimsTests extends RunRuleTest {
         claims.openClaimsPage();
         claims.openFirstClaims();
         claims.editComment();
-        element.firstComment.check(matches(isDisplayed()));
+        claims.checkComment();
     }
 
     @Test
@@ -167,21 +157,19 @@ public class ClaimsTests extends RunRuleTest {
     // перед запуском необходимо убедиться что в первой заявке (после фильтрации) есть минимум 2 комментария
     public void shouldChangeStatusClaim() throws InterruptedException {
         claims.openClaimsPage();
-        element.filterButton.perform(click());
-        element.checkBoxAtWork.perform(click());
-        element.okButton.perform(click());
+        claims.clickFilterButton();
+        claims.filterByInProgressClaims();
         claims.openFirstClaims();
         ViewAfterSwipe(onView(withText("Для смены статуса")), 4, true);
         claims.changeStatus();
-        onView(withId(R.id.claim_comments_list_recycler_view)).perform(swipeDown());
-        element.claimsStatus.check(matches(withText(data.getAtWorkText())));
+        claims.swipeAndCheckStatus();
     }
 
     @Test
     @DisplayName("Создание заявки с пустыми полями")
-    public void shouldCreateClaimsWithEmptyData() throws InterruptedException {
+    public void shouldCreateClaimsWithEmptyData() {
         claims.openCreateClaims();
-        element.saveButton.perform(click());
+        claims.clickSaveButton();
         onView(withText(message.getEmptyFieldsText()))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));
@@ -191,12 +179,12 @@ public class ClaimsTests extends RunRuleTest {
     @DisplayName("Отмена создания заявки")
     public void shouldCancelCreateClaim() {
         claims.openCreateClaims();
-        element.cancelButton.perform(click());
+        claims.clickCancelButton();
         onView(withText(message.getConfirmationText()))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));
         claims.waitingButtonToAppear();
-        element.claimsPage.check(matches(isDisplayed()));
+        claims.checkOpenClaimsPage();
     }
 
 

@@ -1,11 +1,5 @@
 package ru.iteco.fmhandroid.tests;
 
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-
-import static org.hamcrest.Matchers.not;
-
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 
@@ -13,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import ru.iteco.fmhandroid.elements.MainPageElements;
 import ru.iteco.fmhandroid.page.MainPage;
 import ru.iteco.fmhandroid.utils.StartApp;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
@@ -38,59 +31,65 @@ public class MainTests extends RunRuleTest {
     @DisplayName("Блок новостей и заявок отображается в главном меню")
     public void shouldNewsBlockAndClaimsBlockExist() {
         MainPage.openMainPage();
-        MainPageElements.viewNewsBlock.check(matches(isDisplayed()));
-        MainPageElements.viewClaimsBlock.check(matches(isDisplayed()));
+        MainPage.checkViewNewsBlock();
+        MainPage.checkViewClaimsBlock();
     }
 
     @Test
     @DisplayName("Переход во все новости")
     public void shouldGoToNewsBlock() {
-        MainPage.openMainPage().goNewsBlock();
-        MainPageElements.viewNewsList.check(matches(isDisplayed()));
+        MainPage.openMainPage();
+        MainPage.goNewsBlock();
+        MainPage.checkViewNewsList();
     }
 
     @Test
     @DisplayName("Переход во все заявки")
     public void shouldGoToClaimsBlock() {
-        MainPage.openMainPage().goClaimsBlock();
-        MainPageElements.viewClaimsList.check(matches(isDisplayed()));
+        MainPage.openMainPage();
+        MainPage.goClaimsBlock();
+        MainPage.checkViewClaimsList();
     }
 
     @Test
     @DisplayName("Раскрытие первой новости")
     public void shouldRevealFirstNews() {
         MainPage.openMainPage();
-        MainPageElements.openFirstNews.perform(click());
-        MainPageElements.descriptionFirstNews.check(matches(isDisplayed()));
+        MainPage.openFirstNews();
+        MainPage.viewDescriptionFirstNews();
     }
 
     @Test
     @DisplayName("Открытие четвёртой заявки")
     public void shouldOpenFourthClaim() {
-        MainPage.openMainPage().swipeClaims().openFourthClaims().expectedTitleClaims();
+        MainPage.openMainPage();
+        MainPage.swipeClaims();
+        MainPage.openFourthClaims();
+        MainPage.expectedTitleClaims();
     }
 
     @Test
     @DisplayName("Скрытие блока новости")
     public void shouldHideBlockNews() {
         MainPage.openMainPage();
-        MainPageElements.arrowOfNews.perform(click());
-        MainPageElements.noNewsBlock.check(matches(not(isDisplayed())));
+        MainPage.hideNewsBlock();
+        MainPage.checkHideNewsBlock();
     }
 
     @Test
     @DisplayName("Скрытие блока заявок")
     public void shouldHideBlockClaims() {
         MainPage.openMainPage();
-        MainPageElements.arrowOfClaims.perform(click());
-        MainPageElements.noClaimsBlock.check(matches(not(isDisplayed())));
+        MainPage.hideClaimsBlock();
+        MainPage.checkHideClaimsBlock();
     }
 
     @Test
     @DisplayName("Переход к созданию заявки")
     public void shouldClickCreateClaim() {
-        MainPage.openMainPage().openCreationClaimPage();
-        MainPageElements.viewCreateClaimPage.check(matches(isDisplayed()));
+        MainPage.openMainPage();
+        MainPage.openCreationClaimPage();
+        MainPage.checkViewCreateClaimPage();
     }
 
 

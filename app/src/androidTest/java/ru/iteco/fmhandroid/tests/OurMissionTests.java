@@ -1,11 +1,5 @@
 package ru.iteco.fmhandroid.tests;
 
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +7,6 @@ import org.junit.runner.RunWith;
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.data.MissionData;
-import ru.iteco.fmhandroid.elements.OurMissionPageElements;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
 import ru.iteco.fmhandroid.page.OurMissionPage;
 import ru.iteco.fmhandroid.utils.StartApp;
@@ -40,22 +33,23 @@ public class OurMissionTests extends RunRuleTest {
     @DisplayName("Открытие страницы Наша миссия")
     public void shouldOpenOurMission() {
         OurMissionPage.openOurMission();
-        OurMissionPageElements.viewTitleMissionPage.check(matches(withText(text.getTitleText())));
+        OurMissionPage.checkTitleMissionPage();
     }
 
     @Test
     @DisplayName("Открытие 2ой цитаты")
     public void shouldOpenSecondQuote() {
         OurMissionPage.openOurMission();
-        OurMissionPageElements.openSecondQuote.perform(click());
-        OurMissionPageElements.descriptionSecondQuote.check(matches(isDisplayed()));
+        OurMissionPage.openSecondQuote();
+        OurMissionPage.viewDescriptionSecondQuote();
     }
 
     @Test
     @DisplayName("Скролим и открываем 5ую цитату") // БАГ
     public void shouldScrollAndViewFifthQuote() {
-        OurMissionPage.openOurMission().scrollAndOpenPageQuote();
-        OurMissionPageElements.descriptionFifthQuote.check(matches(isDisplayed()));
+        OurMissionPage.openOurMission();
+        OurMissionPage.scrollAndOpenPageQuote();
+        OurMissionPage.viewDescriptionFifthQuote();
     }
 
 

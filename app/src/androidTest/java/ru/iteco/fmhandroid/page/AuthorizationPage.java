@@ -4,21 +4,57 @@ import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 import androidx.test.espresso.PerformException;
+import androidx.test.rule.ActivityTestRule;
 
 
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.data.AuthorizationData;
+import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.StartApp;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 
 public class AuthorizationPage {
+
+    public static AuthorizationPage checkTextInvalidUsernameOrPassword(ActivityTestRule<AppActivity> activityTestRule) {
+        onView(withText("Неверный логин или пароль"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
+        return new AuthorizationPage();
+    }
+
+    public static AuthorizationPage checkTextLoginAndPasswordCannotBeEmpty(ActivityTestRule<AppActivity> activityTestRule) {
+        onView(withText("Логин и пароль не могут быть пустыми"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
+        return new AuthorizationPage();
+    }
+
+    public static AuthorizationPage checkTextCharacterLimitExceeded(ActivityTestRule<AppActivity> activityTestRule) {
+        onView(withText("Превышен лимит символов"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
+        return new AuthorizationPage();
+    }
+
+    public static AuthorizationPage checkTextTheUsersAccountIsBlocked(ActivityTestRule<AppActivity> activityTestRule) {
+        onView(withText("Учётная запись пользователя заблокирована"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
+        return new AuthorizationPage();
+    }
 
     public static MainPage start() {
         try {
