@@ -1,13 +1,5 @@
 package ru.iteco.fmhandroid.tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -84,7 +76,6 @@ public class NewsTests extends RunRuleTest {
         newsPage.openNewsPage();
         newsPage.clickOpenFilter();
         newsPage.selectCategory();
-//        newsPage.clickFirstNews();
         newsPage.checkCategorySalary();
     }
 
@@ -94,9 +85,7 @@ public class NewsTests extends RunRuleTest {
         newsPage.openNewsPage();
         newsPage.clickOpenFilter();
         newsPage.selectNonexistentCategory();
-        onView(withText(data.getTextNonExistentCategory()))
-                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
+        newsPage.messageWrongCategory(activityTestRule);
     }
 
     @Test
@@ -128,10 +117,11 @@ public class NewsTests extends RunRuleTest {
 
     @Test
     @DisplayName("Просмотр описания первой новости в ПУ")
-    public void shouldViewDescriptionFirstNewsInControlPanel() {
+    public void shouldViewDescriptionFirstNewsInControlPanel() throws InterruptedException {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
         newsPage.clickFirstNews();
+        Thread.sleep(2000);
         newsPage.checkViewDescriptionFirstNews();
     }
 
@@ -229,10 +219,11 @@ public class NewsTests extends RunRuleTest {
     @Test
     @DisplayName("Изменение категории новости")
     // тест работатет, но проверить изменения можно только по иконки. Реализацию проверки смены иконки не нашёл.
-    public void shouldChangNewsCategory() {
+    public void shouldChangNewsCategory() throws InterruptedException {
         newsPage.openNewsPage();
         newsPage.openControlPanel();
         newsPage.editCategory();
+        Thread.sleep(2000);
         newsPage.сlickSaveButton();
     }
 
@@ -243,9 +234,7 @@ public class NewsTests extends RunRuleTest {
         newsPage.openControlPanel();
         newsPage.editCategoryToNonexistent();
         newsPage.сlickSaveButton();
-        onView(withText(data.getSaveFailedMessages()))
-                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
+        newsPage.messageSaveFailed(activityTestRule);
     }
 
     @Test

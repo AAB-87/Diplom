@@ -1,13 +1,8 @@
 package ru.iteco.fmhandroid.tests;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 import static ru.iteco.fmhandroid.utils.SwipeActions.ViewAfterSwipe;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
@@ -34,7 +29,6 @@ public class ClaimsTests extends RunRuleTest {
 
     static ClaimsPage claims = new ClaimsPage();
     static ClaimsData.FieldsForClaims fields = new ClaimsData.FieldsForClaims();
-    static ClaimsData.ErrorMessage message = new ClaimsData.ErrorMessage();
 
     @Before
     public void isAuthorizationPage() throws InterruptedException {
@@ -71,7 +65,7 @@ public class ClaimsTests extends RunRuleTest {
     public void shouldFilterClaims() throws InterruptedException {
         claims.openClaimsPage();
         claims.clickFilterButton();
-        claims.clickOpenCheckbox();
+        claims.filterByInProgressClaims();
         claims.clickOkButton();
         claims.expectationSecondClaims();
         claims.checkByInProgressClaims();
@@ -82,8 +76,8 @@ public class ClaimsTests extends RunRuleTest {
     public void shouldFilterClaimsWithoutStatusSelection() throws InterruptedException {
         claims.openClaimsPage();
         claims.clickFilterButton();
-        claims.clickOpenCheckbox();
         claims.filterByInProgressClaims();
+        claims.filterByOpenClaims();
         claims.checkMessageNothing();
     }
 
@@ -114,7 +108,7 @@ public class ClaimsTests extends RunRuleTest {
         FillInFieldsForCreateClaims.FillInFieldsClaims(emptyTitle, title, emptyExecutor, withExecutorChoice, chosenExecutor, executor, emptyDate, emptyTime, withDialPadOrTextInput, saveOrCancelTime, emptyDescription, description);
         claims.clickSaveButton();
         claims.clickFilterButton();
-        claims.clickOpenCheckbox();
+        claims.filterByInProgressClaims();
         claims.clickOkButton();
         ViewAfterSwipe(onView(withText(fields.getTitle)), 2, true);
     }
@@ -124,7 +118,7 @@ public class ClaimsTests extends RunRuleTest {
     public void shouldEditClaim() throws InterruptedException {
         claims.openClaimsPage();
         claims.clickFilterButton();
-        claims.filterByInProgressClaims();
+        claims.filterByOpenClaims();
         Thread.sleep(1000);
         claims.openSecondClaims();
         ViewAfterSwipe(onView(withText("7")), 4, true);
@@ -158,7 +152,7 @@ public class ClaimsTests extends RunRuleTest {
     public void shouldChangeStatusClaim() throws InterruptedException {
         claims.openClaimsPage();
         claims.clickFilterButton();
-        claims.filterByInProgressClaims();
+        claims.filterByOpenClaims();
         claims.openFirstClaims();
         ViewAfterSwipe(onView(withText("Для смены статуса")), 4, true);
         claims.changeStatus();
@@ -170,9 +164,7 @@ public class ClaimsTests extends RunRuleTest {
     public void shouldCreateClaimsWithEmptyData() {
         claims.openCreateClaims();
         claims.clickSaveButton();
-        onView(withText(message.getEmptyFieldsText()))
-                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
+        claims.messageEmptyFields(activityTestRule);
     }
 
     @Test
@@ -180,9 +172,7 @@ public class ClaimsTests extends RunRuleTest {
     public void shouldCancelCreateClaim() {
         claims.openCreateClaims();
         claims.clickCancelButton();
-        onView(withText(message.getConfirmationText()))
-                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
+        claims.messageChangesNotSaved(activityTestRule);
         claims.waitingButtonToAppear();
         claims.checkOpenClaimsPage();
     }

@@ -5,6 +5,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -12,14 +13,20 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static ru.iteco.fmhandroid.utils.SwipeActions.ViewAfterSwipe;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
+import androidx.test.rule.ActivityTestRule;
+
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.data.ClaimsData;
+import ru.iteco.fmhandroid.tests.RunRuleTest;
+import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
-public class ClaimsPage {
+public class ClaimsPage extends RunRuleTest {
 
     static ClaimsData.StatusData data = new ClaimsData.StatusData();
 
@@ -31,26 +38,30 @@ public class ClaimsPage {
     }
 
     public static void checkOpenClaimsPage() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // страница заявок отображается
     }
 
     public static void viewFirstClaims() {
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.plan_date_material_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.plan_date_material_text_view), 0)).perform(click()); // с помощью утилиты находим в списке 1ую заявку и кликаем по ней
     }
 
     public static void checkAuthorClaims() {
-        onView(withId(R.id.executor_name_label_text_view)).check(matches(isDisplayed())); // автор заявки отображается
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.executor_name_label_text_view), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.executor_name_label_text_view)).check(matches(isDisplayed())); // проверяем что автор заявки отображается
     }
 
     public static void clickFilterButton() {
-        onView(withId(R.id.filters_material_button)).perform(click()); // кнопка открытия фильтра
+        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filters_material_button), 10000)); // ожидаем появление нужного элемента
+        onView(withId(R.id.filters_material_button)).perform(click()); // кликаем по кнопке открытия фильтра
     }
 
     public static void checkFilterWindow() {
-        onView(withId(R.id.claim_filter_dialog_title)).check(matches(isDisplayed())); // окно Фильтрация отображается
+        onView(withId(R.id.claim_filter_dialog_title)).check(matches(isDisplayed())); // проверяем что окно Фильтрация отображается
     }
 
-    public static void filterByInProgressClaims() {
+    public static void filterByOpenClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.item_filter_in_progress), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.item_filter_in_progress)).perform(click()); // кликаем по чек-боксу В работе
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_filter_ok_material_button), 10000)); // ожидаем появление нужного элемента
@@ -74,7 +85,7 @@ public class ClaimsPage {
         onView(withId(R.id.status_label_text_view)).check(matches(withText(data.getAtWorkText()))); // проверяем статус заявки
     }
 
-    public static void clickOpenCheckbox() {
+    public static void filterByInProgressClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.item_filter_open), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.item_filter_open)).perform(click()); // кликаем по чек-боксу Открыта
     }
@@ -135,7 +146,7 @@ public class ClaimsPage {
         Thread.sleep(5000);
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_comment_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_comment_image_button)).perform(click()); // кликаем по кнопке добавления комментария
-        onView(allOf(withHint("Комментарий"))).perform(replaceText("666")); // вписываем комментарий
+        onView(allOf(withHint("Комментарий"))).perform(replaceText("000")); // вписываем комментарий
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(5000);
     }
@@ -143,7 +154,7 @@ public class ClaimsPage {
     public static void checkAddComment() {
         ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
         onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
-        onView(withText("666")).check(matches(isDisplayed())); // проверяем что комментарий отображается
+        onView(withText("000")).check(matches(isDisplayed())); // проверяем что комментарий отображается
     }
 
     public static void openFirstClaims() throws InterruptedException {
@@ -156,14 +167,14 @@ public class ClaimsPage {
     public static void editComment() throws InterruptedException {
         onView(withIndex(withId(R.id.edit_comment_image_button), 0)).perform(click()); // с помощью утилиты находим кнопку редактирования для 1го комментария в списке и кликаем по ней
         Thread.sleep(5000);
-        onView(allOf(withText("Отредактированный7"))).perform(replaceText("Отредактированный8")); // редактируем комментарий
+        onView(allOf(withText("Редакция1"))).perform(replaceText("Редакция2")); // редактируем комментарий
         onView(withId(R.id.save_button)).check(matches(isDisplayed())); // убеждаемся что кнопка Сохранить отображается
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(3000);
     }
 
     public static void checkComment() {
-        onView(withText("Отредактированный8")).check(matches(isDisplayed())); // текст комментария
+        onView(withText("Редакция2")).check(matches(isDisplayed())); // текст комментария
     }
 
     public static void changeStatus() throws InterruptedException {
@@ -182,6 +193,18 @@ public class ClaimsPage {
     public static void clickCancelButton() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.cancel_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.cancel_button)).perform(click()); // кликаем по кнопке ОТМЕНИТЬ
+    }
+
+    public static void messageEmptyFields(ActivityTestRule<AppActivity> activityTestRule) {
+        onView(withText("Заполните пустые поля"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed()));
+    }
+
+    public static void messageChangesNotSaved(ActivityTestRule<AppActivity> activityTestRule) {
+        onView(withText("Изменения не будут сохранены. Вы действительно хотите выйти?"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed()));
     }
 
 

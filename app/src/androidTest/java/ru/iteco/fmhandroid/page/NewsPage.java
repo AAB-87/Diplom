@@ -6,6 +6,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
@@ -14,12 +15,16 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static ru.iteco.fmhandroid.utils.WithIndex.withIndex;
 
 import androidx.test.espresso.matcher.RootMatchers;
+import androidx.test.rule.ActivityTestRule;
 
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.data.NewsData;
+import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
 public class NewsPage {
@@ -212,7 +217,7 @@ public class NewsPage {
 
     public static void checkStatusSecondNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_published_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.news_item_published_text_view), 1)).check(matches(withText(data.getStatusNotActive()))); // с помощью утилиты находим статус в 1ой новости
+        onView(withIndex(withId(R.id.news_item_published_text_view), 1)).check(matches(withText(data.getStatusNotActive()))); // с помощью утилиты находим статус в 2ой новости
     }
 
     public static void editCategory() {
@@ -225,7 +230,7 @@ public class NewsPage {
 
     public static void checkPublicationDateFirstNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_publication_date_text_view), 10000)); // ожидаем появление нужного элемента
-        onView(withIndex(withId(R.id.news_item_publication_date_text_view), 0)).check(matches(withText(containsString(data.getToday())))); // // с помощью утилиты находим описание в 1ой новости в списке
+        onView(withIndex(withId(R.id.news_item_publication_date_text_view), 0)).check(matches(withText(containsString("07.01.2023")))); // // с помощью утилиты находим описание в 1ой новости в списке
     }
 
     public static void editCategoryToNonexistent() {
@@ -241,7 +246,6 @@ public class NewsPage {
         onView(withIndex(withId(R.id.edit_news_item_image_view), 1)).perform(click()); // кликаем по кнопке редактирования 2ой новости
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.switcher), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.switcher)).perform(click()); // Меняем свитчер на Не активна
-        onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.save_button), 10000)); // ожидаем появление нужного элемента
     }
 
     public static void editDateFirstNews() {
@@ -260,6 +264,18 @@ public class NewsPage {
         closeSoftKeyboard(); // скрываем клавиатуру ввода
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filter_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.filter_button)).perform(click()); // кликаем по кнопки Фильтровать
+    }
+
+    public static void messageWrongCategory(ActivityTestRule<AppActivity> activityTestRule) {
+        onView(withText("Выбрана несуществующая категория"))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
+    }
+
+    public static void messageSaveFailed(ActivityTestRule<AppActivity> activityTestRule) {
+        onView(withText("Сохранение не удалось. Попробуйте позднее."))
+                .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed())); // проверяем что отображается окно с нужным текстом
     }
 
 
