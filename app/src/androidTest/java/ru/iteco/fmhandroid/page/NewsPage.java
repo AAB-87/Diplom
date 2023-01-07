@@ -24,6 +24,7 @@ import androidx.test.rule.ActivityTestRule;
 
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.data.NewsData;
+import ru.iteco.fmhandroid.tests.NewsTests;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.utils.ViewActions;
 
