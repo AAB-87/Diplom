@@ -1,0 +1,53 @@
+{
+    "name": "Отмена создания заявки",
+    "start": 1673084236659,
+    "stop": 1673084260938,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "5edcf377-a455-4fae-9a64-c2c09572a879",
+    "historyId": "f531a28f48699e8d51848f88be7db6f9",
+    "fullName": "ru.iteco.fmhandroid.tests.ClaimsTests.shouldCancelCreateClaim",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.ClaimsTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldCancelCreateClaim"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.ClaimsTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(739)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

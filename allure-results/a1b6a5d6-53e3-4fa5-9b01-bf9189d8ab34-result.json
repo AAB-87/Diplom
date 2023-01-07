@@ -1,0 +1,53 @@
+{
+    "name": "Открытие окна создания заявки",
+    "start": 1673013730907,
+    "stop": 1673013750518,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "a1b6a5d6-53e3-4fa5-9b01-bf9189d8ab34",
+    "historyId": "22dfa974b4f4f7f92b057f37ed5cf503",
+    "fullName": "ru.iteco.fmhandroid.tests.ClaimsTests.shouldOpenCreateClaimsScreen",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.ClaimsTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldOpenCreateClaimsScreen"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.ClaimsTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1329)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+{
+    "name": "Открытие фильтра заявкок",
+    "start": 1673013708299,
+    "stop": 1673013730883,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "01d4e071-1dc8-4733-b5dd-54fab9956855",
+    "historyId": "228538d1b39a14971aecfe9a67f3d8c0",
+    "fullName": "ru.iteco.fmhandroid.tests.ClaimsTests.shouldOpenFilterClaims",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.ClaimsTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldOpenFilterClaims"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.ClaimsTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1329)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

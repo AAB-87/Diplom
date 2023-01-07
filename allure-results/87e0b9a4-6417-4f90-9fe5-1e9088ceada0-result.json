@@ -1,0 +1,53 @@
+{
+    "name": "Вход с пустыми полями",
+    "start": 1670766235353,
+    "stop": 1670766251582,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "87e0b9a4-6417-4f90-9fe5-1e9088ceada0",
+    "historyId": "887fb4bf6cfe9ee9357c893c097af366",
+    "fullName": "ru.iteco.fmhandroid.tests.AuthorizationPageTests.logInWithEmptyData",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationPageTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "logInWithEmptyData"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationPageTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(559)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

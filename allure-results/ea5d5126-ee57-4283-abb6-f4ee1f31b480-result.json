@@ -1,0 +1,53 @@
+{
+    "name": "Открытие страницы новостей",
+    "start": 1673016471436,
+    "stop": 1673016490033,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "ea5d5126-ee57-4283-abb6-f4ee1f31b480",
+    "historyId": "a6635333f4ab367f8f860043c4f086f1",
+    "fullName": "ru.iteco.fmhandroid.tests.NewsTests.shouldOpenNewsPage",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.NewsTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldOpenNewsPage"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.NewsTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1349)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

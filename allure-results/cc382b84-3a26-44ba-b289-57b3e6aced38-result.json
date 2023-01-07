@@ -1,0 +1,53 @@
+{
+    "name": "Просмотр описания шестой новости",
+    "start": 1672994106488,
+    "stop": 1672994129718,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "cc382b84-3a26-44ba-b289-57b3e6aced38",
+    "historyId": "7f885482eb6987c7f369a634117e4611",
+    "fullName": "ru.iteco.fmhandroid.tests.NewsTests.shouldViewDescriptionsSixthNews",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.NewsTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldViewDescriptionsSixthNews"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.NewsTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(929)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

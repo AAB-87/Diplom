@@ -1,0 +1,53 @@
+{
+    "name": "Изменение категории новости",
+    "start": 1673040604030,
+    "stop": 1673040632384,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "57270394-c8ec-4eea-9f55-5fe4396567d5",
+    "historyId": "2280f7d9fbea49c2ac88d7312f2c4bf6",
+    "fullName": "ru.iteco.fmhandroid.tests.NewsTests.shouldChangNewsCategory",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.NewsTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldChangNewsCategory"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.NewsTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1804)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

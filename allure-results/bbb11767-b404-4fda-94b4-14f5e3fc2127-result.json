@@ -1,0 +1,53 @@
+{
+    "name": "Скрытие блока заявок",
+    "start": 1673029390352,
+    "stop": 1673029412042,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "bbb11767-b404-4fda-94b4-14f5e3fc2127",
+    "historyId": "37b2ad7195968aab2d7190e5e8aca25b",
+    "fullName": "ru.iteco.fmhandroid.tests.MainTests.shouldHideBlockClaims",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.MainTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldHideBlockClaims"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.MainTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1589)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+{
+    "name": "Вход с пустым логином и валидным паролем",
+    "start": 1672333296559,
+    "stop": 1672333324365,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "44e00520-2e80-4b75-8d42-1e5d8c4f1dbf",
+    "historyId": "39b7df351772354abe10189289bee525",
+    "fullName": "ru.iteco.fmhandroid.tests.AuthorizationTests.logInWithEmptyLoginAndValidPassword",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "logInWithEmptyLoginAndValidPassword"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1500)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

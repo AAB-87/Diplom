@@ -1,0 +1,53 @@
+{
+    "name": "Открытие страницы Наша миссия",
+    "start": 1672993412706,
+    "stop": 1672993434307,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "f8dd6d50-1539-4900-8a59-82e66e4541a7",
+    "historyId": "fa6b6707dc2339c14ef176ddff99db36",
+    "fullName": "ru.iteco.fmhandroid.tests.OurMissionTests.shouldOpenOurMission",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.OurMissionTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldOpenOurMission"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.OurMissionTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(899)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

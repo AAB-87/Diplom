@@ -1,0 +1,53 @@
+{
+    "name": "Авторизация с валидными данными",
+    "start": 1673015484017,
+    "stop": 1673015495686,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "ebe74333-72b7-45af-8b17-37c4443b3502",
+    "historyId": "314786edf6fe368be33935f2aab788e4",
+    "fullName": "ru.iteco.fmhandroid.tests.AuthorizationTests.shouldLogInWithValidData",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldLogInWithValidData"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1344)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

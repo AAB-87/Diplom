@@ -1,0 +1,53 @@
+{
+    "name": "Блок новостей и заявок отображается в главном меню",
+    "start": 1673014149279,
+    "stop": 1673014167684,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "ed441dd8-e6a9-4809-9b8a-fc61162ee646",
+    "historyId": "2afc4a461735d87df20a60ac11995574",
+    "fullName": "ru.iteco.fmhandroid.tests.MainTests.shouldNewsBlockAndClaimsBlockExist",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.MainTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldNewsBlockAndClaimsBlockExist"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.MainTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1334)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

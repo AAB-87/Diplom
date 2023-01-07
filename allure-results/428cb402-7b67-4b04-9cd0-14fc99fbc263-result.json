@@ -1,0 +1,53 @@
+{
+    "name": "Переход во все заявки",
+    "start": 1673014260254,
+    "stop": 1673014278903,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "428cb402-7b67-4b04-9cd0-14fc99fbc263",
+    "historyId": "477b41701966283ed5e7e7fcbc2016f",
+    "fullName": "ru.iteco.fmhandroid.tests.MainTests.shouldGoToClaimsBlock",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.MainTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldGoToClaimsBlock"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.MainTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1334)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

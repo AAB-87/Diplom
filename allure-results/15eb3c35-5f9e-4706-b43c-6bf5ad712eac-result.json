@@ -1,0 +1,53 @@
+{
+    "name": "Вход с логином в верхнем регистре и валидным паролем",
+    "start": 1672336046336,
+    "stop": 1672336061819,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "15eb3c35-5f9e-4706-b43c-6bf5ad712eac",
+    "historyId": "8e303d5f60b170da73855d810defa326",
+    "fullName": "ru.iteco.fmhandroid.tests.AuthorizationTests.logInWithLoginInUppercaseAndValidPassword",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "logInWithLoginInUppercaseAndValidPassword"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1535)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

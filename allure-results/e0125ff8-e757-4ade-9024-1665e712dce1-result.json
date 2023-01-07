@@ -1,0 +1,53 @@
+{
+    "name": "Фильтрация новостей по категории в ПУ",
+    "start": 1673087722014,
+    "stop": 1673087751200,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "e0125ff8-e757-4ade-9024-1665e712dce1",
+    "historyId": "bdc82f5d31815eadcd160f25eef2a79a",
+    "fullName": "ru.iteco.fmhandroid.tests.NewsTests.shouldFilterNewsInControlPanelByCategory",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.NewsTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldFilterNewsInControlPanelByCategory"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.NewsTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(796)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

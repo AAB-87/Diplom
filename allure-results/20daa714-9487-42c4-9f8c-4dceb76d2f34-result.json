@@ -1,0 +1,53 @@
+{
+    "name": "Вход с валидным логином и НЕвалидным паролем",
+    "start": 1670766436871,
+    "stop": 1670766462187,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "20daa714-9487-42c4-9f8c-4dceb76d2f34",
+    "historyId": "3aa375ee34087e67b0faa9358a3aac15",
+    "fullName": "ru.iteco.fmhandroid.tests.AuthorizationPageTests.logInWithValidLoginAndInvalidPassword",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationPageTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "logInWithValidLoginAndInvalidPassword"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.AuthorizationPageTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(609)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

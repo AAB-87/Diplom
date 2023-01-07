@@ -1,0 +1,53 @@
+{
+    "name": "Открытие 2ой цитаты",
+    "start": 1672993453728,
+    "stop": 1672993473040,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "d1167a47-b84a-45dc-9f5d-1a843de5d522",
+    "historyId": "a156d25261dd0179df4f1c5b8edb7f93",
+    "fullName": "ru.iteco.fmhandroid.tests.OurMissionTests.shouldOpenSecondQuote",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.OurMissionTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldOpenSecondQuote"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.OurMissionTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(899)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

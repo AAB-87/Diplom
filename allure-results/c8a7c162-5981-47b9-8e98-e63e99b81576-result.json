@@ -1,0 +1,53 @@
+{
+    "name": "Проcмотр версии приложения",
+    "start": 1672337393060,
+    "stop": 1672337423170,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "c8a7c162-5981-47b9-8e98-e63e99b81576",
+    "historyId": "275f0e44f53d299816ca202ac0eb44f2",
+    "fullName": "ru.iteco.fmhandroid.tests.AboutAppTests.ViewVersionApp",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.AboutAppTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "ViewVersionApp"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.AboutAppTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1569)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

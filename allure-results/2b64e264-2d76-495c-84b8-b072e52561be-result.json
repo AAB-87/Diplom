@@ -1,0 +1,53 @@
+{
+    "name": "Фильтрация заявкок без выбора статуса",
+    "start": 1673013448859,
+    "stop": 1673013474477,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "2b64e264-2d76-495c-84b8-b072e52561be",
+    "historyId": "1d3165a2fa0072bf8aa3855127baced7",
+    "fullName": "ru.iteco.fmhandroid.tests.ClaimsTests.shouldFilterClaimsWithoutStatusSelection",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.tests"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.tests.ClaimsTests"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldFilterClaimsWithoutStatusSelection"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.tests.ClaimsTests"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(1329)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

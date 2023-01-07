@@ -146,7 +146,7 @@ public class ClaimsPage extends RunRuleTest {
         Thread.sleep(5000);
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_comment_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_comment_image_button)).perform(click()); // кликаем по кнопке добавления комментария
-        onView(allOf(withHint("Комментарий"))).perform(replaceText("000")); // вписываем комментарий
+        onView(allOf(withHint("Комментарий"))).perform(replaceText("HHH")); // вписываем комментарий
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(5000);
     }
@@ -154,7 +154,7 @@ public class ClaimsPage extends RunRuleTest {
     public static void checkAddComment() {
         ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
         onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
-        onView(withText("000")).check(matches(isDisplayed())); // проверяем что комментарий отображается
+        onView(withText("HHH")).check(matches(isDisplayed())); // проверяем что комментарий отображается
     }
 
     public static void openFirstClaims() throws InterruptedException {
@@ -167,14 +167,14 @@ public class ClaimsPage extends RunRuleTest {
     public static void editComment() throws InterruptedException {
         onView(withIndex(withId(R.id.edit_comment_image_button), 0)).perform(click()); // с помощью утилиты находим кнопку редактирования для 1го комментария в списке и кликаем по ней
         Thread.sleep(5000);
-        onView(allOf(withText("Редакция1"))).perform(replaceText("Редакция2")); // редактируем комментарий
+        onView(allOf(withText("Редакция2"))).perform(replaceText("Редакция3")); // редактируем комментарий
         onView(withId(R.id.save_button)).check(matches(isDisplayed())); // убеждаемся что кнопка Сохранить отображается
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
         Thread.sleep(3000);
     }
 
     public static void checkComment() {
-        onView(withText("Редакция2")).check(matches(isDisplayed())); // текст комментария
+        onView(withText("Редакция3")).check(matches(isDisplayed())); // текст комментария
     }
 
     public static void changeStatus() throws InterruptedException {
