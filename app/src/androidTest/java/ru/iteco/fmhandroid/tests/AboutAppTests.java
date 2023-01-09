@@ -37,25 +37,30 @@ public class AboutAppTests extends RunRuleTest {
     @Test
     @DisplayName("Проcмотр версии приложения")
     public void shouldViewVersionApp() {
-        AboutAppPage.openAboutApp().checkVersionApp();
+        AboutAppPage.openAboutApp();
+        AboutAppPage.checkVersionApp();
+
     }
 
     @Test
     @DisplayName("Переход по ссылке Политики конфиденциальности") // БАГ
     public void shouldViewPrivacyPolicy() {
-        AboutAppPage.openAboutApp().clickPrivacyPolicy();
+        AboutAppPage.openAboutApp();
+        AboutAppPage.clickPrivacyPolicy();
     }
 
     @Test
     @DisplayName("Переход по ссылке Пользовательское соглашение") // БАГ
     public void shouldViewUserAgreement() {
-        AboutAppPage.openAboutApp().clickUserAgreement();
+        AboutAppPage.openAboutApp();
+        AboutAppPage.clickUserAgreement();
     }
 
     @Test
     @DisplayName("Проcмотр имени производителя и года создания приложения")
     public void shouldViewCompanyNameAndYear() {
-        AboutAppPage.openAboutApp().checkCompanyNameAndYear();
+        AboutAppPage.openAboutApp();
+        AboutAppPage.checkCompanyNameAndYear();
     }
 
 

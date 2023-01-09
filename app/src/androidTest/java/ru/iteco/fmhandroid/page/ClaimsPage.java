@@ -30,92 +30,92 @@ public class ClaimsPage extends RunRuleTest {
 
     static ClaimsData.StatusData data = new ClaimsData.StatusData();
 
-    public static void openClaimsPage() throws InterruptedException {
+    public void openClaimsPage() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Заявки")).perform(click()); // кликаем по Заявки
         Thread.sleep(2000);
     }
 
-    public static void checkOpenClaimsPage() {
+    public void checkOpenClaimsPage() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // страница заявок отображается
     }
 
-    public static void viewFirstClaims() {
+    public void viewFirstClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.plan_date_material_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.plan_date_material_text_view), 0)).perform(click()); // с помощью утилиты находим в списке 1ую заявку и кликаем по ней
     }
 
-    public static void checkAuthorClaims() {
+    public void checkAuthorClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.executor_name_label_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.executor_name_label_text_view)).check(matches(isDisplayed())); // проверяем что автор заявки отображается
     }
 
-    public static void clickFilterButton() {
+    public void clickFilterButton() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.filters_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.filters_material_button)).perform(click()); // кликаем по кнопке открытия фильтра
     }
 
-    public static void checkFilterWindow() {
+    public void checkFilterWindow() {
         onView(withId(R.id.claim_filter_dialog_title)).check(matches(isDisplayed())); // проверяем что окно Фильтрация отображается
     }
 
-    public static void filterByOpenClaims() {
+    public void filterByOpenClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.item_filter_in_progress), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.item_filter_in_progress)).perform(click()); // кликаем по чек-боксу В работе
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_filter_ok_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.claim_list_filter_ok_material_button)).perform(click()); // кликаем по кнопке ОК
     }
 
-    public static void clickOkButton() {
+    public void clickOkButton() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_filter_ok_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.claim_list_filter_ok_material_button)).perform(click()); // кликаем по кнопке ОК
     }
 
-    public static void checkByInProgressClaims() {
+    public void checkByInProgressClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_label_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.status_label_text_view)).check(matches(withText(data.getAtWorkText()))); // проверяем статус заявки
     }
 
-    public static void swipeAndCheckStatus() {
+    public void swipeAndCheckStatus() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_comments_list_recycler_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.claim_comments_list_recycler_view)).perform(swipeDown()); // свайпаем вверх
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_label_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.status_label_text_view)).check(matches(withText(data.getAtWorkText()))); // проверяем статус заявки
     }
 
-    public static void filterByInProgressClaims() {
+    public void filterByInProgressClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.item_filter_open), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.item_filter_open)).perform(click()); // кликаем по чек-боксу Открыта
     }
 
-    public static void checkMessageNothing() {
+    public void checkMessageNothing() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.empty_claim_list_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.empty_claim_list_text_view)).check(matches(isDisplayed())); // отображается сообщение Здесь ничего нет
     }
 
-    public static void viewTitleCreateText() {
+    public void viewTitleCreateText() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_edit_text), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // отображается поле категории заявки
     }
 
-    public static void clickSaveButton() {
+    public void clickSaveButton() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.save_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.save_button)).perform(click()); // кликаем по кнопке Сохранить
     }
 
-    public static void openSecondClaims() {
+    public void openSecondClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.plan_date_material_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.plan_date_material_text_view), 1)).perform(click()); // кнопка открытия 2ой заявкиой
     }
 
-    public static void editClaimsButton() {
+    public void editClaimsButton() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.edit_processing_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.edit_processing_image_button)).perform(click()); // кнопка редактирования заявки
     }
 
-    public static void openCreateClaims() {
+    public void openCreateClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_menu_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_menu_image_button)).perform(click()); // кликаем по кнопке Меню
         onView(withText("Заявки")).perform(click()); // кликаем по Заявки
@@ -125,7 +125,7 @@ public class ClaimsPage extends RunRuleTest {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_edit_text), 10000)); // ожидаем появление нужного элемента
     }
 
-    public static void expectationSecondClaims() throws InterruptedException {
+    public void expectationSecondClaims() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 10000)); // проверяем что отображается список заявок
         Thread.sleep(2000);
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
@@ -133,7 +133,7 @@ public class ClaimsPage extends RunRuleTest {
         Thread.sleep(2000);
     }
 
-    public static void editAndCheckClaimsDate() {
+    public void editAndCheckClaimsDate() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.date_in_plan_text_input_edit_text), 5000)); // находим поле описания
         onView(withId(R.id.date_in_plan_text_input_edit_text)).perform(click()); // кликаем по полю даты
         onView(withText("ОК")).perform(click()); // кликаем по кнопке ОК
@@ -141,7 +141,7 @@ public class ClaimsPage extends RunRuleTest {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.plane_date_text_view), 5000)).check(matches(withText("27.12.2022"))); // проверяем что описание соответствует
     }
 
-    public static void addComment() throws InterruptedException {
+    public void addComment() throws InterruptedException {
         ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
         Thread.sleep(5000);
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_comment_image_button), 10000)); // ожидаем появление нужного элемента
@@ -151,20 +151,20 @@ public class ClaimsPage extends RunRuleTest {
         Thread.sleep(5000);
     }
 
-    public static void checkAddComment() {
+    public void checkAddComment() {
         ViewAfterSwipe(onView(withText("Новый")), 4, true); // свайпаем вниз до последнего комментария
         onView(withId(R.id.add_comment_image_button)).check(matches(isDisplayed())); // убеждаемся что кнопка добавления комментария видна
         onView(withText("HHH")).check(matches(isDisplayed())); // проверяем что комментарий отображается
     }
 
-    public static void openFirstClaims() throws InterruptedException {
+    public void openFirstClaims() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_swipe_refresh), 10000)); // проверяем что отображается список заявок
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click()); // с помощью утилиты находим 1ю заявку в списке и кликаем по ней
         Thread.sleep(3000);
     }
 
-    public static void editComment() throws InterruptedException {
+    public void editComment() throws InterruptedException {
         onView(withIndex(withId(R.id.edit_comment_image_button), 0)).perform(click()); // с помощью утилиты находим кнопку редактирования для 1го комментария в списке и кликаем по ней
         Thread.sleep(5000);
         onView(allOf(withText("Редакция2"))).perform(replaceText("Редакция3")); // редактируем комментарий
@@ -173,11 +173,11 @@ public class ClaimsPage extends RunRuleTest {
         Thread.sleep(3000);
     }
 
-    public static void checkComment() {
+    public void checkComment() {
         onView(withText("Редакция3")).check(matches(isDisplayed())); // текст комментария
     }
 
-    public static void changeStatus() throws InterruptedException {
+    public void changeStatus() throws InterruptedException {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.status_processing_image_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.status_processing_image_button)).perform(click()); // кликаем по кнопке смены статуса
         Thread.sleep(3000);
@@ -185,23 +185,23 @@ public class ClaimsPage extends RunRuleTest {
         Thread.sleep(3000);
     }
 
-    public static void waitingButtonToAppear() {
+    public void waitingButtonToAppear() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(android.R.id.button1), 10000)); // ожидаем появление нужного элемента
         onView(withId(android.R.id.button1)).perform(click()); // кликаем по кнопке OK
     }
 
-    public static void clickCancelButton() {
+    public void clickCancelButton() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.cancel_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.cancel_button)).perform(click()); // кликаем по кнопке ОТМЕНИТЬ
     }
 
-    public static void messageEmptyFields(ActivityTestRule<AppActivity> activityTestRule) {
+    public void messageEmptyFields(ActivityTestRule<AppActivity> activityTestRule) {
         onView(withText("Заполните пустые поля"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));
     }
 
-    public static void messageChangesNotSaved(ActivityTestRule<AppActivity> activityTestRule) {
+    public void messageChangesNotSaved(ActivityTestRule<AppActivity> activityTestRule) {
         onView(withText("Изменения не будут сохранены. Вы действительно хотите выйти?"))
                 .inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));

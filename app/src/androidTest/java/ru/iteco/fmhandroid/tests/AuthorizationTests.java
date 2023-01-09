@@ -19,7 +19,7 @@ public class AuthorizationTests extends RunRuleTest {
     // ViewActions - производим действие с элементом
     // ViewAssertions - проверяем состояние найденного элемента
 
-    private static AuthorizationData.AuthData data = new AuthorizationData.AuthData();
+    AuthorizationData.AuthData data = new AuthorizationData.AuthData();
 
     @Before
     public void isAuthorizationPage() {

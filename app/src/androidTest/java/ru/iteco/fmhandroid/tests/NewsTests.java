@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.data.NewsData;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
 import ru.iteco.fmhandroid.page.NewsPage;
 import ru.iteco.fmhandroid.utils.FillInFieldsForCreateNews;
@@ -16,8 +15,7 @@ import ru.iteco.fmhandroid.utils.StartApp;
 
 public class NewsTests extends RunRuleTest {
 
-    static NewsData.DataInNewsList data = new NewsData.DataInNewsList();
-    static NewsPage newsPage = new NewsPage();
+    NewsPage newsPage = new NewsPage();
 
     // Общие правила
     // ViewMatcher - находим, определяем элемент в иерархии

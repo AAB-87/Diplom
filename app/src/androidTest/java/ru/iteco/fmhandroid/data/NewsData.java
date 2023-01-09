@@ -6,7 +6,7 @@ public class NewsData {
     }
 
     public static class DataInNewsList {
-        private String today = "07.01.2023";
+        private String today = "09.01.2023";
         private String statusNotActive = "НЕ АКТИВНА";
         private String editText = "Отредактированный текст";
         private String titleTextSalary = "Зарплата";

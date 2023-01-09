@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.data.MissionData;
 import ru.iteco.fmhandroid.page.AuthorizationPage;
 import ru.iteco.fmhandroid.page.OurMissionPage;
 import ru.iteco.fmhandroid.utils.StartApp;
@@ -15,12 +14,13 @@ import ru.iteco.fmhandroid.utils.StartApp;
 
 public class OurMissionTests extends RunRuleTest {
 
+    OurMissionPage OurMissionPage = new OurMissionPage();
+
+
     // Общие правила
     // ViewMatcher - находим, определяем элемент в иерархии
     // ViewActions - производим действие с элементом
     // ViewAssertions - проверяем состояние найденного элемента
-
-    MissionData.QuotesData text = new MissionData.QuotesData();
 
     @Before
     public void isAuthorizationPage() throws InterruptedException {

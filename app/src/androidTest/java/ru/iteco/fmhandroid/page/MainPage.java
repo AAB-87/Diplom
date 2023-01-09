@@ -17,113 +17,94 @@ import ru.iteco.fmhandroid.utils.ViewActions;
 
 public class MainPage {
 
-    public static MainPage mainPage() {
+    public static void mainPage() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.container_list_news_include_on_fragment_main), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.container_list_news_include_on_fragment_main)).check(matches(isDisplayed())); // проверяем что отображается блок новостей
-        return new MainPage();
     }
 
-    public static MainPage openMainPage() {
+    public static void openMainPage() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.container_list_news_include_on_fragment_main), 10000)); // ожидаем появление нужного элемента
-        return new MainPage();
     }
 
-    public static MainPage checkViewNewsBlock() {
+    public static void checkViewNewsBlock() {
         onView(withText("Новости")).check(matches(isDisplayed())); // проверяем что заголовок Новости отображается
-        return new MainPage();
     }
 
-    public static MainPage checkViewClaimsBlock() {
+    public static void checkViewClaimsBlock() {
         onView(withText("Заявки")).check(matches(isDisplayed())); // проверяем что заголовок Заявки отображается
-        return new MainPage();
     }
 
-    public static MainPage goNewsBlock() {
+    public static void goNewsBlock() {
         onView(withText("ВСЕ НОВОСТИ")).perform(click()); // кликаем по Все Новости
-        return new MainPage();
     }
 
-    public static MainPage checkViewNewsList() {
+    public static void checkViewNewsList() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.container_list_news_include), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.container_list_news_include)).check(matches(isDisplayed())); // проверяем что заголовок Новости отображается
-        return new MainPage();
     }
 
-    public static MainPage goClaimsBlock() {
+    public static void goClaimsBlock() {
         onView(withText("ВСЕ ЗАЯВКИ")).perform(click()); // кликаем по Все Заявки
-        return new MainPage();
     }
 
-    public static MainPage checkViewClaimsList() {
+    public static void checkViewClaimsList() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_recycler_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed())); // проверяем что заголовок Новости отображается
-        return new MainPage();
     }
 
-    public static MainPage openFirstNews() {
+    public static void openFirstNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_material_card_view), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.news_item_material_card_view), 0)).perform(click()); // с помощью утилиты находим 1ю новость в списке
-        return new MainPage();
     }
 
-    public static MainPage viewDescriptionFirstNews() {
+    public static void viewDescriptionFirstNews() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_description_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.news_item_description_text_view), 0)).perform(click()); // с помощью утилиты находим описание 1ой новости в списке
-        return new MainPage();
     }
 
-    public static MainPage swipeClaims() {
+    public static void swipeClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.main_swipe_refresh), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.main_swipe_refresh)).perform(swipeUp()); // прокручиваем страницу для видимости нужного элемента
-        return new MainPage();
     }
 
-    public static MainPage hideNewsBlock() {
+    public static void hideNewsBlock() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.expand_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.expand_material_button), 0)).perform(click()); // кликаем по кнопке сокрытия блока новостей
-        return new MainPage();
     }
 
-    public static MainPage checkHideNewsBlock() {
+    public static void checkHideNewsBlock() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.news_item_material_card_view), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.news_item_material_card_view), 0)).check(matches(not(isDisplayed()))); // проверяем что блок новостей не отображается
-        return new MainPage();
     }
 
-    public static MainPage hideClaimsBlock() {
+    public static void hideClaimsBlock() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.expand_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.expand_material_button), 1)).perform(click()); // кликаем по кнопке сокрытия блока заявок
-        return new MainPage();
     }
 
-    public static MainPage checkHideClaimsBlock() {
+    public static void checkHideClaimsBlock() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.claim_list_card), 1)).check(matches(not(isDisplayed()))); // проверяем что блок заявок не отображается
-        return new MainPage();
     }
 
-    public static MainPage openFourthClaims() {
+    public static void openFourthClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.claim_list_card), 10000)); // ожидаем появление нужного элемента
         onView(withIndex(withId(R.id.claim_list_card), 3)).perform(click()); // с помощью утилиты находим 4ю заявку в списке и кликаем по ней
-        return new MainPage();
     }
 
-    public static MainPage expectedTitleClaims() {
+    public static void expectedTitleClaims() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_text_view), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.title_text_view)).check(matches(isDisplayed())); // проверяем что заголовок заявки отображается
-        return new MainPage();
     }
 
-    public static MainPage openCreationClaimPage() {
+    public static void openCreationClaimPage() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.add_new_claim_material_button), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.add_new_claim_material_button)).perform(click()); // кликаем по кнопке создания заявки
-        return new MainPage();
     }
 
-    public static MainPage checkViewCreateClaimPage() {
+    public static void checkViewCreateClaimPage() {
         onView(isRoot()).perform(ViewActions.waitElement(withId(R.id.title_edit_text), 10000)); // ожидаем появление нужного элемента
         onView(withId(R.id.title_edit_text)).check(matches(isDisplayed())); // проверяем что страница создания заявки отображается
-        return new MainPage();
     }
 
 
